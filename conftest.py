@@ -7,9 +7,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
-from locators.locators import BasePageLocators
+
 
 
 STAGE_URL = "https://test2.stroyrem-nn.ru/"
@@ -26,25 +25,13 @@ def driver():
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
         driver.set_window_size(1382, 754)
     else:
+        chrome_options.add_argument('--headless')
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-        driver.maximize_window()
     yield driver
     print('\nquit browser...')
     driver.quit()
 
-
-@pytest.fixture()
-def open_and_load_main_page(driver, wait):
-    driver.get(STAGE_URL)
-    wait.until(EC.presence_of_element_located(BasePageLocators.HEADER_LOGO))
-
-
-@pytest.fixture()
-def wait(driver):
-    wait = WebDriverWait(driver, 15)
-    yield wait
-
-
+#скриншот
 @allure.feature("Make a Screenshot")
 def pytest_runtest_makereport(item, call):
     if call.when == 'call':
@@ -75,3 +62,4 @@ def clear_allure_results_folder():
                     shutil.rmtree(file_path)
             except Exception as e:
                 print(f"Failed to delete {file_path}. Reason: {e}")
+
