@@ -10,7 +10,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 
 
-
 STAGE_URL = "https://test2.stroyrem-nn.ru/"
 
 
@@ -24,12 +23,19 @@ def driver():
         chrome_options.add_argument('--disable-dev-shm-usage')
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
         driver.set_window_size(1382, 754)
+    elif os.environ['DOCKERRUN'] == '1':
+        chrome_options.add_argument('--headless')
+        chrome_options.add_argument('--no-sandbox')
+        chrome_options.add_argument('--disable-dev-shm-usage')
+        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        driver.set_window_size(1382, 754)
     else:
         chrome_options.add_argument('--headless')
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     yield driver
     print('\nquit browser...')
     driver.quit()
+
 
 #скриншот
 @allure.feature("Make a Screenshot")
