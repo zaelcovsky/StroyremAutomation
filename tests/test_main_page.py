@@ -4,7 +4,6 @@ from pages.main_page import MainPage
 from constants import MAIN_PAGE_STAGE_URL, MAIN_PAGE_TITLE
 
 
-
 @allure.epic("Main Page")
 class TestMainPage():
 
