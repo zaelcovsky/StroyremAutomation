@@ -23,7 +23,7 @@ def driver():
         chrome_options.add_argument('--disable-dev-shm-usage')
         driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
         driver.set_window_size(1382, 754)
-    elif os.environ['DOCKERRUN'] == '1':
+    elif 'DOCKERRUN' in os.environ:
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
