@@ -9,8 +9,6 @@ ENV DOCKERRUN=1
 
 # Set working directore for our project
 WORKDIR /app
-# Set volume for allure report files
-VOLUME /allure_result
 # Chrome browser and Allure dependency installation
 # default-jre, default-jdk - for Allure, curl for downloading, rest of all - for Chrome browser
 RUN apt-get update && apt-get install -y \
@@ -56,6 +54,8 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 # Copy all project files in docker image
 COPY . .
+# Set volume for allure report files
+# VOLUME /allure_result
 # Expose our port to the world
 EXPOSE 9999
 # Run tests and make Allure report
