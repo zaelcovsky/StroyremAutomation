@@ -11,12 +11,6 @@ class SeleniumBase:
         self.driver = driver
         self.__wait = WebDriverWait(driver, 15, 0.3)
 
-    def open_page(self, url):
-        """
-        Открывает браузер на заданном url.
-        """
-        self.driver.get(self.url)
-
     def find_element(self, locator):
         """
         Находит элемент по заданному локатору.

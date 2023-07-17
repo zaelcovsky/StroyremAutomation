@@ -10,9 +10,6 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 
 
-STAGE_URL = "https://test2.stroyrem-nn.ru/"
-
-
 @pytest.fixture(scope='function')
 def driver():
     print('\nstart browser...')
