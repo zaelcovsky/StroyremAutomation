@@ -1,0 +1,10 @@
+version: '3'
+services:
+  test_framework:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./tests:/tests
+    ports:
+      - "9999:9999"

@@ -37,18 +37,20 @@ RUN apt-get update && apt-get install -y \
     libxrandr2 \
     xdg-utils \
     libu2f-udev \
-    libvulkan1
+    libvulkan1 \
+    && rm -rf /var/lib/apt/lists/*
 # Chrome browser installation
-RUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-RUN apt-get install -y ./google-chrome-stable_current_amd64.deb
-RUN rm google-chrome-stable_current_amd64.deb
+RUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && apt-get update \
+    && dpkg -i ./google-chrome-stable_current_amd64.deb || apt-get install -fy \
+    && rm google-chrome-stable_current_amd64.deb
 # Check chrome version
 RUN echo "Chrome: " && google-chrome --version
 # Allure installation
-RUN curl -o allure-commandline-2.23.0.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.23.0/allure-commandline-2.23.0.tgz
-RUN tar -zxvf allure-commandline-2.23.0.tgz -C /opt/
-RUN ln -s /opt/allure-2.23.0/bin/allure /usr/bin/allure
-RUN rm -rf allure-commandline-2.23.0.tgz
+RUN curl -o allure-commandline-2.23.0.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.23.0/allure-commandline-2.23.0.tgz \
+    && tar -zxvf allure-commandline-2.23.0.tgz -C /opt/ \
+    && ln -s /opt/allure-2.23.0/bin/allure /usr/bin/allure \
+    && rm -rf allure-commandline-2.23.0.tgz
 # Copy and install requirements.txt
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
@@ -62,4 +64,3 @@ EXPOSE 9999
 CMD ["sh", "-c", "pytest -s -v --alluredir=allure_result tests/ && allure serve --port 9999 allure_result"]
 # Stub for debugging
 #CMD ["tail", "-f", "/dev/null"]
-
