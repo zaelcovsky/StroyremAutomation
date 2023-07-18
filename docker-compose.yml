@@ -1,10 +1,9 @@
-version: '3'
+
 services:
-  test_framework:
+  allure_report:
     build:
       context: .
-      dockerfile: Dockerfile
     volumes:
-      - ./tests:/tests
+      - ./allure_result:/app/allure_result
     ports:
-      - "9999:9999"
+      - 127.0.0.1:9999:9999
