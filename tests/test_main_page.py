@@ -5,7 +5,7 @@ from constants import MAIN_PAGE_STAGE_URL, MAIN_PAGE_TITLE
 
 
 @allure.epic("Main Page")
-class TestMainPage():
+class TestMainPage:
 
     # @allure.title("TC 001 - проверка логотипа Stroyrem в хедере на главной странице")
     # @pytest.mark.smoke_test

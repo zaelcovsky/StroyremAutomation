@@ -1,4 +1,3 @@
-
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 from selenium.webdriver import Keys
@@ -11,12 +10,6 @@ class SeleniumBase:
     def __init__(self, driver):
         self.driver = driver
         self.__wait = WebDriverWait(driver, 15, 0.3)
-
-    def open_page(self):
-        """
-        Открывает браузер на заданном url.
-        """
-        self.driver.get(self.url)
 
     def find_element(self, locator):
         """
