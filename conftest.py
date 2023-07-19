@@ -9,6 +9,10 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC
 
+from pages.basket_page import BasketPage
+from pages.item_page import ItemPage
+from pages.main_page import MainPage
+
 
 @pytest.fixture(scope='function')
 def driver():
@@ -34,7 +38,7 @@ def driver():
     driver.quit()
 
 
-#скриншот
+# скриншот
 @allure.feature("Make a Screenshot")
 def pytest_runtest_makereport(item, call):
     if call.when == 'call':
@@ -65,4 +69,12 @@ def clear_allure_results_folder():
                     shutil.rmtree(file_path)
             except Exception as e:
                 print(f"Failed to delete {file_path}. Reason: {e}")
+
+
+@pytest.fixture(scope='function', autouse=True)
+def setup(driver):
+    main_page = MainPage(driver)
+    item_page = ItemPage(driver)
+    basket_page = BasketPage(driver)
+    yield main_page, item_page, basket_page
 
