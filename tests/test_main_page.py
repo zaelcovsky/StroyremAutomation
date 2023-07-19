@@ -29,7 +29,6 @@ class TestMainPage:
     @pytest.mark.smoke_test
     @pytest.mark.xfail(reason="Если выбранного товара нет в наличии, то селектор _pd_articul все равно активен, \
                             соответственно тест падает")
-    # добавляем случайный товар в корзину и сравниваем артикул
     def test_positive_header_basket1_smoke(self, driver, setup):
         main_page, item_page, basket_page = setup
         driver.get(MAIN_PAGE_STAGE_URL)
