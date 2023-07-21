@@ -40,10 +40,11 @@ RUN apt-get update && apt-get install -y \
     libvulkan1 \
     && rm -rf /var/lib/apt/lists/*
 # Chrome browser installation
-RUN curl -LO  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+ARG CHROME_VERSION="114.0.5735.198-1"
+RUN curl -Lo chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb \
     && apt-get update \
-    && dpkg -i ./google-chrome-stable_current_amd64.deb || apt-get install -fy \
-    && rm google-chrome-stable_current_amd64.deb
+    && dpkg -i ./chrome.deb || apt-get install -fy \
+    && rm chrome.deb
 # Check chrome version
 RUN echo "Chrome: " && google-chrome --version
 # Allure installation
