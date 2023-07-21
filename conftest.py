@@ -7,8 +7,6 @@ from selenium.webdriver.support.wait import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support import expected_conditions as EC
-
 from pages.basket_page import BasketPage
 from pages.item_page import ItemPage
 from pages.main_page import MainPage
