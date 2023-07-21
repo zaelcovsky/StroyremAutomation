@@ -1,3 +1,4 @@
+from selenium.common import NoSuchElementException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver import ActionChains
 from selenium.webdriver import Keys
@@ -93,16 +94,16 @@ class SeleniumBase:
         """
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
-    # def action_move_to_element(self, element):
-    #     """
-    #     Двигает курсор мышки на середину выбранного элемента
-    #     Имитирует hover.
-    #     Можно использовать для проверки интерактивности элемента при наведении
-    #     курсора мышки на элемент.
-    #     """
-    #     action = ActionChains(self.driver)
-    #     action.move_to_element(element)
-    #     action.perform()
+    def action_move_to_element(self, element):
+        """
+        Двигает курсор мышки на середину выбранного элемента
+        Имитирует hover.
+        Можно использовать для проверки интерактивности элемента при наведении
+        курсора мышки на элемент.
+        """
+        action = ActionChains(self.driver)
+        action.move_to_element(element)
+        action.perform()
 
     # def press_enter_button(self):
     #     """
@@ -124,12 +125,12 @@ class SeleniumBase:
     #     """
     #     self.driver.switch_to.window(self.driver.window_handles[1])
 
-    # def scroll_to_the_element(self, locator):
-    #     """
-    #     Скроллит до указанного элемента.
-    #     """
-    #     element = self.driver.find_element(*locator)
-    #     self.driver.execute_script("arguments[0].scrollIntoView();", element)
+    def scroll_to_the_element(self, locator):
+        """
+        Скроллит до указанного элемента.
+        """
+        element = self.driver.find_element(*locator)
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
     # def scroll_down_the_page(self):
     #     """
@@ -171,4 +172,10 @@ class SeleniumBase:
     #     image_width = self.driver.execute_script("return arguments[0].width;", image)
     #     assert image_height > 0 and image_width > 0, f"The image {image.get_attribute('src')} is not displayed"
 
+    def is_element_present(self, locator):
+        try:
+            self.driver.find_element(*locator)
+            return True
+        except NoSuchElementException:
+            return False
 
