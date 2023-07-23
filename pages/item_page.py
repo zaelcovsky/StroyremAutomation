@@ -19,12 +19,12 @@ class ItemPage(SeleniumBase):
     @allure.step("Добавление товара в корзину и переход в корзину")
     def add_item_to_basket_and_go_to_basket(self):
         if self.is_element_present(self._add_item):
-            self.element_is_visible(self._add_item).click()
             if self.is_element_present(self._is_not_available) and self.find_element(
                     self._is_not_available).text == "Товара нет в наличии":
                 print("Товар отсутствует в наличии")
                 return None
             else:
+                self.element_is_visible(self._add_item).click()
                 articul = self.driver.find_element(*self._pd_articul).text
                 self.element_is_visible(self._basket).click()
                 return articul

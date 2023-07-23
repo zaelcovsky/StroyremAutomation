@@ -1,13 +1,9 @@
 # Главная страница
 import random
-
-from selenium.webdriver.support.wait import WebDriverWait
-
 from base.seleniumbase import SeleniumBase
 from selenium.webdriver.common.by import By
 import allure
-from constants import ARTICLES_PAGE_URL, DELIVERY_PAGE_URL, LIFTING_PAGE_URL, LOCATION_PAGE_URL, NEW_IN_STOCK_PAGE_URL, \
-    PRICE_PAGE_URL, REVIEWS_PAGE_URL, SHARES_PAGE_URL
+from constants import DELIVERY_PAGE_URL, LIFTING_PAGE_URL, LOCATION_PAGE_URL
 
 
 class MainPage(SeleniumBase):
@@ -67,19 +63,25 @@ class MainPage(SeleniumBase):
 
     @allure.step("Клик по случайному элементу")
     def go_to_random_item(self):
+        """Выбирает случайный элемент из списка и кликает на него"""
         all_items = self.find_elements(self._random_item)
-        random_item = random.choice(all_items)
-        self.go_to_element(random_item)
-        random_item.click()
+        if all_items:
+            random_item = random.choice(all_items)
+            self.go_to_element(random_item)
+            random_item.click()
+        else:
+            raise ValueError("No items found for the _random_item locator")
 
     @allure.step("Проверка функциональности блока 'Советы от профессионалов ремонта'")
     def get_building_advices_section(self):
+        """Проверяет и возвращает элементы блока 'Советы от профессионалов ремонта'"""
         section = self.driver.find_element(*self._building_advices_section)
         self.go_to_element(section)
         return self.driver.find_elements(*self._cart_items)
 
     @allure.step("Проверка селекторов на странице статьи")
     def check_selectors_article_page(self):
+        """Проверяет доступность селекторов на странице статьи и возвращает их статус"""
         selectors_status = {}
         selectors_status['comment_button'] = self.driver.find_element(*self._comment_button).is_enabled()
         selectors_status['input_name'] = self.driver.find_element(*self._input_name).is_enabled()
@@ -87,24 +89,30 @@ class MainPage(SeleniumBase):
         selectors_status['send_button'] = self.driver.find_element(*self._send_button).is_enabled()
         return selectors_status
 
-    @allure.step("Проверка наличия статей на странице c советами(т.к. видео есть не на всех страницах")
+    @allure.step("Проверка наличия статей на странице с советами (т.к. видео есть не на всех страницах)")
     def check_page_content(self):
+        """Проверяет и возвращает статьи на странице с советами"""
         articles = self.find_elements(self._article_items)
+        if not articles:
+            raise ValueError("No articles found on the page")
         return articles
 
     @allure.step("Проверка функциональности ссылки 'Обратный звонок'")
     def check_call_back_link(self):
+        """Проверяет работоспособность ссылки 'Обратный звонок' и возвращает текст заголовка"""
         self.driver.find_element(*self._call_back_link).click()
         title = self.driver.find_element(*self._call_back_popup_title).text
         return title
 
-    @allure.step("Проверка функциональности ссылки 'Строительные советы'")
-    def check_building_tips_link(self):
-        self.driver.find_element(*self._building_advices_link).click()
-        return ARTICLES_PAGE_URL
+    @allure.step("Проверка функциональности ссылки 'Доставка'")
+    def check_delivery_link(self):
+        """Проверяет работоспособность ссылки 'Доставка' и возвращает результат проверки URL страницы"""
+        self.driver.find_element(*self._delivery_link).click()
+        return self.driver.current_url == DELIVERY_PAGE_URL
 
     @allure.step("Проверка функциональности ссылки 'Каталог товаров'")
     def check_product_catalog_link(self):
+        """Проверяет работоспособность ссылки 'Каталог товаров' и возвращает статус видимости и текст заголовка"""
         self.driver.find_element(*self._product_catalog_link).click()
         product_catalog = self.driver.find_element(*self._product_catalog)
         title = self.driver.find_element(*self._product_catalog_header)
@@ -112,57 +120,65 @@ class MainPage(SeleniumBase):
 
     @allure.step("Проверка функциональности ссылки 'Доставка'")
     def check_delivery_link(self):
+        """Проверяет работоспособность ссылки 'Доставка' и возвращает результат проверки URL страницы"""
         self.driver.find_element(*self._delivery_link).click()
-        return DELIVERY_PAGE_URL
+        return self.driver.current_url == DELIVERY_PAGE_URL
 
     @allure.step("Проверка функциональности ссылки 'email'-info@stroyrem-nn.ru")
     def check_email_link(self):
+        """Проверяет работоспособность ссылки 'email'-info@stroyrem-nn.ru и возвращает None, пока не реализовано"""
         self.driver.find_element(*self._email_link).click()
-        # возвращает None поскольку попап еще не реализован
         return None
 
     @allure.step("Проверка функциональности ссылки 'Подъем на этаж'")
     def check_floor_climb_link(self):
+        """Проверяет работоспособность ссылки 'Подъем на этаж' и возвращает результат проверки URL страницы"""
         self.driver.find_element(*self._floor_climb_link).click()
-        return LIFTING_PAGE_URL
+        return self.driver.current_url == LIFTING_PAGE_URL
 
     @allure.step("Проверка функциональности ссылки 'Местоположение'")
     def check_location_link(self):
+        """Проверяет работоспособность ссылки 'Местоположение' и возвращает результат проверки URL страницы"""
         self.driver.find_element(*self._location).click()
-        return LOCATION_PAGE_URL
+        return self.driver.current_url == LOCATION_PAGE_URL
 
     @allure.step("Проверка функциональности ссылки 'Новинки'")
     def check_new_in_stock_link(self):
+        """Проверяет работоспособность ссылки 'Новинки' и возвращает текст заголовка"""
         self.driver.find_element(*self._new_products_link).click()
         title = self.driver.find_element(*self._new_products_title).text
         return title
 
     @allure.step("Проверка функциональности ссылки 'Оплатить заказ'")
     def check_payment_order_link(self):
+        """Проверяет работоспособность ссылки 'Оплатить заказ' и возвращает текст заголовка"""
         self.driver.find_element(*self._payment_order_link).click()
         title = self.driver.find_element(*self._payment_order_title).text
         return title
 
     @allure.step("Проверка функциональности ссылки 'номер телефона'-8 (831) 260-11-60")
     def check_telephone_number_link(self):
+        """Проверяет работоспособность ссылки 'номер телефона'-8(831)260-11-60 и возвращает None, пока не реализовано"""
         self.driver.find_element(*self._telephone_number_link).click()
-        # возвращает None поскольку попап еще не реализован
         return None
 
     @allure.step("Проверка функциональности ссылки 'Прайс'")
     def check_price_link(self):
+        """Проверяет работоспособность ссылки 'Прайс' и возвращает None, пока не реализовано"""
         self.driver.find_element(*self._price_link).click()
         return None
 
     @allure.step("Проверка функциональности ссылки 'Отзывы'")
     def check_reviews_link(self):
+        """Проверяет работоспособность ссылки 'Отзывы' и возвращает текст заголовка"""
         self.driver.find_element(*self._reviews_link).click()
         self.driver.switch_to.window(self.driver.window_handles[-1])
-        title = self.find_element(self._header).text
+        title = self.driver.find_element(*self._header).text
         return title
 
     @allure.step("Проверка функциональности ссылки 'Акции'")
     def check_shares_link(self):
+        """Проверяет работоспособность ссылки 'Акции' и возвращает текст заголовка"""
         self.driver.find_element(*self._shares_link).click()
-        title = self.find_element(self._header).text
+        title = self.driver.find_element(*self._header).text
         return title

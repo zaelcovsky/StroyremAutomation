@@ -76,3 +76,9 @@ def setup(driver):
     basket_page = BasketPage(driver)
     yield main_page, item_page, basket_page
 
+
+@pytest.fixture
+def main_page(driver, url):
+    page = MainPage(driver)
+    driver.get(url)
+    return page
