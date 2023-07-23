@@ -1,5 +1,8 @@
 # Главная страница
 import random
+
+from selenium.webdriver.support.wait import WebDriverWait
+
 from base.seleniumbase import SeleniumBase
 from selenium.webdriver.common.by import By
 import allure
@@ -19,7 +22,6 @@ class MainPage(SeleniumBase):
         self._user_profile_button = (By.XPATH, "//a[@class='header-profile-link auth-tooltip-show']")
         self._enter_button = (By.XPATH, "//a[@class='show-auth-modal']")
         self._registration_button = (By.XPATH, "//a[@class='register-link']")
-        self._product_catalog_header = (By.XPATH, "//div[contains(text(),'Каталог')]")
         # секция лучшие предложения
         self._random_item = (By.XPATH, "(//div[@class='product-link-div'])")
         # self._item = (By.XPATH, "(//div[@class='product-link-div'])[1]")
@@ -40,11 +42,14 @@ class MainPage(SeleniumBase):
         self._attach_application = (By.XPATH, "(//a[@href='#attach-application'])[2]")
         # футер "Интернет магазин"
         self._building_advices_link = (By.XPATH, "(//a[@href='/articles'])[3]")
-        self._product_catalog_link = (By.XPATH, "//a[contains(text(),'Каталог товаров')]")
+        self._product_catalog_link = (By.XPATH, "(//div[@class='footer-col']/ul/li/a)[1]")
         self._product_catalog = (By.XPATH, "//div[@id='mcm-screen-0']")
-        self._new_products = (By.XPATH, "(//a[@href='/catalog/new'])[3]")
+        self._product_catalog_header = (By.XPATH, "(//div[@class='mcm-h'])[1]")
+        self._new_products_link = (By.XPATH, "(//a[@href='/catalog/new'])[3]")
+        self._new_products_title = (By.XPATH, "//h1[contains(text(),'Новинки')]")
         self._price_link = (By.XPATH, "//a[@href='/price']")
         self._reviews_link = (By.XPATH, "(//a[contains(text(), 'Отзывы')])[3]")
+        self._header = (By.XPATH, "//h1")
         self._shares_link = (By.XPATH, "(//a[contains(text(), 'Акции')])[2]")
         # футер "Доставка и оплата"
         self._delivery_link = (By.XPATH, "(//a[@href='/dostavka'])[3]")
@@ -102,8 +107,8 @@ class MainPage(SeleniumBase):
     def check_product_catalog_link(self):
         self.driver.find_element(*self._product_catalog_link).click()
         product_catalog = self.driver.find_element(*self._product_catalog)
-        product_catalog_header = self.driver.find_element(*self._product_catalog_header)
-        return product_catalog.is_displayed(), product_catalog_header.text
+        title = self.driver.find_element(*self._product_catalog_header)
+        return product_catalog.is_displayed(), title.text
 
     @allure.step("Проверка функциональности ссылки 'Доставка'")
     def check_delivery_link(self):
@@ -128,8 +133,9 @@ class MainPage(SeleniumBase):
 
     @allure.step("Проверка функциональности ссылки 'Новинки'")
     def check_new_in_stock_link(self):
-        self.driver.find_element(*self._new_products).click()
-        return NEW_IN_STOCK_PAGE_URL
+        self.driver.find_element(*self._new_products_link).click()
+        title = self.driver.find_element(*self._new_products_title).text
+        return title
 
     @allure.step("Проверка функциональности ссылки 'Оплатить заказ'")
     def check_payment_order_link(self):
@@ -146,15 +152,17 @@ class MainPage(SeleniumBase):
     @allure.step("Проверка функциональности ссылки 'Прайс'")
     def check_price_link(self):
         self.driver.find_element(*self._price_link).click()
-        return PRICE_PAGE_URL
+        return None
 
     @allure.step("Проверка функциональности ссылки 'Отзывы'")
     def check_reviews_link(self):
         self.driver.find_element(*self._reviews_link).click()
         self.driver.switch_to.window(self.driver.window_handles[-1])
-        return REVIEWS_PAGE_URL
+        title = self.find_element(self._header).text
+        return title
 
     @allure.step("Проверка функциональности ссылки 'Акции'")
     def check_shares_link(self):
         self.driver.find_element(*self._shares_link).click()
-        return SHARES_PAGE_URL
+        title = self.find_element(self._header).text
+        return title
