@@ -1,8 +1,10 @@
+# Главная страница
 import random
 from base.seleniumbase import SeleniumBase
 from selenium.webdriver.common.by import By
 import allure
-from constants import ARTICLES_PAGE_URL, DELIVERY_PAGE_URL
+from constants import ARTICLES_PAGE_URL, DELIVERY_PAGE_URL, LIFTING_PAGE_URL, LOCATION_PAGE_URL, NEW_IN_STOCK_PAGE_URL, \
+    PRICE_PAGE_URL, REVIEWS_PAGE_URL, SHARES_PAGE_URL
 
 
 class MainPage(SeleniumBase):
@@ -40,8 +42,18 @@ class MainPage(SeleniumBase):
         self._building_advices_link = (By.XPATH, "(//a[@href='/articles'])[3]")
         self._product_catalog_link = (By.XPATH, "//a[contains(text(),'Каталог товаров')]")
         self._product_catalog = (By.XPATH, "//div[@id='mcm-screen-0']")
+        self._new_products = (By.XPATH, "(//a[@href='/catalog/new'])[3]")
+        self._price_link = (By.XPATH, "//a[@href='/price']")
+        self._reviews_link = (By.XPATH, "(//a[contains(text(), 'Отзывы')])[3]")
+        self._shares_link = (By.XPATH, "(//a[contains(text(), 'Акции')])[2]")
         # футер "Доставка и оплата"
         self._delivery_link = (By.XPATH, "(//a[@href='/dostavka'])[3]")
+        self._floor_climb_link = (By.XPATH, "(//a[@href='/podem-strojmaterialov-v-kvartiru'])[3]")
+        self._payment_order_link = (By.XPATH, "(//a[@href='#order-pay'])[3]")
+        self._payment_order_title = (By.XPATH, "(//div[@class='screen-h'])[1]")
+        # футер top-right
+        self._email_link = (By.XPATH, "//a[@class='footer-email']")
+        self._telephone_number_link = (By.XPATH, "//a[@class='footer-phone']")
 
     # находим element, но не проводим тесты над ним
     @allure.step("Проверяем что элемент _terrestrially_section виден на странице")
@@ -97,3 +109,52 @@ class MainPage(SeleniumBase):
     def check_delivery_link(self):
         self.driver.find_element(*self._delivery_link).click()
         return DELIVERY_PAGE_URL
+
+    @allure.step("Проверка функциональности ссылки 'email'-info@stroyrem-nn.ru")
+    def check_email_link(self):
+        self.driver.find_element(*self._email_link).click()
+        # возвращает None поскольку попап еще не реализован
+        return None
+
+    @allure.step("Проверка функциональности ссылки 'Подъем на этаж'")
+    def check_floor_climb_link(self):
+        self.driver.find_element(*self._floor_climb_link).click()
+        return LIFTING_PAGE_URL
+
+    @allure.step("Проверка функциональности ссылки 'Местоположение'")
+    def check_location_link(self):
+        self.driver.find_element(*self._location).click()
+        return LOCATION_PAGE_URL
+
+    @allure.step("Проверка функциональности ссылки 'Новинки'")
+    def check_new_in_stock_link(self):
+        self.driver.find_element(*self._new_products).click()
+        return NEW_IN_STOCK_PAGE_URL
+
+    @allure.step("Проверка функциональности ссылки 'Оплатить заказ'")
+    def check_payment_order_link(self):
+        self.driver.find_element(*self._payment_order_link).click()
+        title = self.driver.find_element(*self._payment_order_title).text
+        return title
+
+    @allure.step("Проверка функциональности ссылки 'номер телефона'-8 (831) 260-11-60")
+    def check_telephone_number_link(self):
+        self.driver.find_element(*self._telephone_number_link).click()
+        # возвращает None поскольку попап еще не реализован
+        return None
+
+    @allure.step("Проверка функциональности ссылки 'Прайс'")
+    def check_price_link(self):
+        self.driver.find_element(*self._price_link).click()
+        return PRICE_PAGE_URL
+
+    @allure.step("Проверка функциональности ссылки 'Отзывы'")
+    def check_reviews_link(self):
+        self.driver.find_element(*self._reviews_link).click()
+        self.driver.switch_to.window(self.driver.window_handles[-1])
+        return REVIEWS_PAGE_URL
+
+    @allure.step("Проверка функциональности ссылки 'Акции'")
+    def check_shares_link(self):
+        self.driver.find_element(*self._shares_link).click()
+        return SHARES_PAGE_URL

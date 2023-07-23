@@ -1,3 +1,4 @@
+# Страница товара
 import allure
 from selenium.webdriver.common.by import By
 from base.seleniumbase import SeleniumBase
