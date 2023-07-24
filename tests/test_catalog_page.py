@@ -15,3 +15,5 @@ class TestCatalogPage:
         driver.get(link)
         text = page.get_header_catalog_menu()
         assert text == "Стройматериалы", "The page doesn't have name 'Стройматериалы'"
+
+#комментарий
