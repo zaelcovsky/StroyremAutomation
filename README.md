@@ -4,7 +4,7 @@
 #Несколько маркеров
 #Потоки 
 #запуск тестов на проде и на stage
-#Проверка Allure
+
 
 ### Запуск тестов в Docker
 - ```docker build -t stroyremautomation:0.0.1 .```
