@@ -3,7 +3,7 @@ name: Stroyrem
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/1 * * * *'
+    - cron: '0 0 * * *'
 
 jobs:
   build:
