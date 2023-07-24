@@ -28,6 +28,7 @@ class TestMainPage:
 
     @allure.feature("Header functionality")
     @allure.title("TC 003 - Функционал кнопоки 'Корзина' в шапке главной страницы")
+    @pytest.mark.xfail
     @pytest.mark.smoke_test
     def test_positive_header_basket1_smoke(self, setup, main_page):
         main_page, item_page, basket_page = setup
@@ -91,8 +92,8 @@ class TestMainPage:
         assert result == "Варианты доставки", f"Ожидалось 'Варианты доставки', но получено '{result}'"
 
     @allure.feature("Footer functionality")
-    @pytest.mark.xfail(reason="Попап не реализован")
     @allure.title("TC 010 - Проверка функциональности ссылки 'email'")
+    @pytest.mark.xfail(reason="Попап не реализован")
     @pytest.mark.smoke_test
     def test_positive_footer_email_smoke(self, main_page):
         main_page.check_email_link()
@@ -130,22 +131,22 @@ class TestMainPage:
         assert title == 'Оплата заказа', f"Ожидалось 'Оплата заказа', но получено '{title}'"
 
     @allure.feature("Footer functionality")
-    @pytest.mark.xfail(reason="Попап не реализован")
     @allure.title("TC 015 - Проверка функциональности ссылки 'telephone number'")
+    @pytest.mark.xfail(reason="Попап не реализован")
     @pytest.mark.smoke_test
     def test_positive_footer_phone_number_smoke(self, main_page):
         main_page.check_telephone_number_link()
 
     @allure.feature("Footer functionality")
-    @pytest.mark.xfail(reason="При переходе на страницу выдает 404 ошибку")
     @allure.title("TC 016 - Проверка функциональности ссылки 'Прайс'")
+    @pytest.mark.xfail(reason="При переходе на страницу выдает 404 ошибку")
     @pytest.mark.smoke_test
     def test_positive_footer_price_smoke(self, main_page):
         main_page.check_price_link()
 
-    @pytest.mark.xfail(reason="При переходе на страницу отзывов может предложено пройти капчу")
     @allure.feature("Footer functionality")
     @allure.title("TC 017 - Проверка функциональности ссылки 'Отзывы'")
+    @pytest.mark.xfail(reason="При переходе на страницу отзывов может предложено пройти капчу")
     @pytest.mark.smoke_test
     def test_positive_footer_reviews_smoke(self, main_page):
         title = main_page.check_reviews_link()

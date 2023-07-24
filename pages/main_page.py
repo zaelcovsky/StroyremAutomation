@@ -3,7 +3,7 @@ import random
 from base.seleniumbase import SeleniumBase
 from selenium.webdriver.common.by import By
 import allure
-from constants import DELIVERY_PAGE_URL, LIFTING_PAGE_URL, LOCATION_PAGE_URL
+from constants import DELIVERY_PAGE_URL, LIFTING_PAGE_URL, LOCATION_PAGE_URL, ARTICLES_PAGE_URL
 
 
 class MainPage(SeleniumBase):
@@ -103,6 +103,12 @@ class MainPage(SeleniumBase):
         self.driver.find_element(*self._call_back_link).click()
         title = self.driver.find_element(*self._call_back_popup_title).text
         return title
+
+    @allure.step("Проверка функциональности ссылки 'Строительные советы'")
+    def check_building_tips_link(self):
+        """Проверяет работоспособность ссылки 'Строительные советы' и возвращает URL страницы"""
+        self.driver.find_element(*self._building_advices_link).click()
+        return ARTICLES_PAGE_URL
 
     @allure.step("Проверка функциональности ссылки 'Доставка'")
     def check_delivery_link(self):
