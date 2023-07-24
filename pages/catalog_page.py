@@ -16,10 +16,8 @@ class CatalogPage(SeleniumBase):
         self._stroymateriali = (By.CSS_SELECTOR, "#mcm-screen-182 span:nth-child(2)")
         self._glavnaya = (By.XPATH, "//a[contains(text(),'Главная')]")
         self._catalog = (By.XPATH, "//a[contains(text(),'Каталог')]")
+        self._page_title = (By.XPATH, "//h1")
 
-    @allure.step("Проверяем что элемент _header_catalog_menu виден на странице")
-    def get_header_catalog_menu(self):
-        self.element_is_visible(self._header_catalog_menu).click()
-        self.element_is_visible(self._stroymateriali_link).click()
-        stroymateriali = self.element_is_visible(self._stroymateriali)
-        return stroymateriali.text
+    @allure.step("Получение текста заголовка страницы")
+    def get_page_title_text(self):
+        return self.driver.find_element(*self._page_title).text
