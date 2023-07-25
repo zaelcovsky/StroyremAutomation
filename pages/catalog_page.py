@@ -21,3 +21,15 @@ class CatalogPage(SeleniumBase):
     @allure.step("Получение текста заголовка страницы")
     def get_page_title_text(self):
         return self.driver.find_element(*self._page_title).text
+
+    @allure.step("Проверяем что элемент 'Каталог' виден на странице")
+    def get_header_catalog_menu(self):
+        return self.element_is_visible(self._header_catalog_menu)
+
+    @allure.step("Проверяем что элемент 'Стройматериалы' виден на странице")
+    def get_catalog_stroymateriali_link(self):
+        return self.element_is_visible(self._stroymateriali_link)
+
+    @allure.step("Проверяем что текст 'Стройматериалы' виден на странице")
+    def get_catalog_stroymateriali_text(self):
+        return self.element_is_visible(self._stroymateriali).text
