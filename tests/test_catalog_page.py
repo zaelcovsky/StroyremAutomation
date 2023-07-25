@@ -1,3 +1,5 @@
+import time
+
 import pytest
 import allure
 from pages.catalog_page import CatalogPage
@@ -11,9 +13,9 @@ class TestCatalogPage:
     @pytest.mark.parametrize('link', [MAIN_PAGE_PROD_URL, MAIN_PAGE_STAGE_URL])
     @pytest.mark.smoke_test
     def test_001_positive_button_stroymateriali_smoke_catalog(self, driver, link):
-        page = CatalogPage(driver)
+        catalog_page = CatalogPage(driver)
         driver.get(link)
-        text = page.get_header_catalog_menu()
-        assert text == "Стройматериалы", "The page doesn't have name 'Стройматериалы'"
-
-#комментарий
+        catalog_page.get_header_catalog_menu().click()
+        catalog_page.get_catalog_stroymateriali_link().click()
+        text = catalog_page.get_catalog_stroymateriali_text()
+        assert text == "Стройматериалы", "Меню 'Стройматериалы' не открылось"
