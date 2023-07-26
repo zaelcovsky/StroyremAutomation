@@ -35,4 +35,4 @@ class CatalogPage(SeleniumBase):
 
     @allure.step("Проверяем что навигация 'Главная - Каталог' видна на странице")
     def get_navigation_glavnaya_catalog_text(self):
-        return self.elements_are_present(self._glavnaya_catalog)
+        return self.elements_are_visible(self._glavnaya_catalog)
