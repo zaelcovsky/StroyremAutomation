@@ -38,16 +38,16 @@ class SeleniumBase:
         self.go_to_element(self.element_is_present(locator))
         return self.__wait.until(EC.visibility_of_element_located(locator))
 
-    # def elements_are_visible(self, locator, timeout=5):
-    #     """
-    #     Ожидает проверку, что элементы присутствуют в DOM-дереве, видны и отображаются на странице.
-    #     Видимость означает, что элементы не только отображаются,
-    #     но также имеет высоту и ширину больше 0.
-    #     Локатор - используется для поиска элементов. Возвращает WebElements.
-    #     Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
-    #     при необходимости можно будет изменить.
-    #     """
-    #     return wait(self.driver, timeout).until(EC.visibility_of_all_elements_located(locator))
+    def elements_are_visible(self, locator, timeout=5):
+        """
+        Ожидает проверку, что элементы присутствуют в DOM-дереве, видны и отображаются на странице.
+        Видимость означает, что элементы не только отображаются,
+        но также имеет высоту и ширину больше 0.
+        Локатор - используется для поиска элементов. Возвращает WebElements.
+        Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
+        при необходимости можно будет изменить.
+        """
+        return self.__wait.until(EC.visibility_of_all_elements_located(locator))
 
     def element_is_present(self, locator):
         """
@@ -59,15 +59,15 @@ class SeleniumBase:
         """
         return self.__wait.until(EC.presence_of_element_located(locator))
 
-    # def elements_are_present(self, locator, timeout=5):
-    #     """
-    #     Ожидает проверку, что элементы присутствуют в DOM-дереве, но не обязательно,
-    #     что видны и отображаются на странице.
-    #     Локатор - используется для поиска элемента. Возвращает WebElement.
-    #     Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
-    #     при необходимости можно будет изменить.
-    #     """
-    #     return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
+    def elements_are_present(self, locator, timeout=5):
+        """
+        Ожидает проверку, что элементы присутствуют в DOM-дереве, но не обязательно,
+        что видны и отображаются на странице.
+        Локатор - используется для поиска элемента. Возвращает WebElement.
+        Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
+        при необходимости можно будет изменить.
+        """
+        return self.__wait.until(EC.presence_of_all_elements_located(locator))
 
     # def element_is_not_visible(self, locator, timeout=5):
     #     """

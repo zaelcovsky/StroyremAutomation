@@ -17,5 +17,9 @@ class TestCatalogPage:
         driver.get(link)
         catalog_page.get_header_catalog_menu().click()
         catalog_page.get_catalog_stroymateriali_link().click()
-        text = catalog_page.get_catalog_stroymateriali_text()
-        assert text == "Стройматериалы", "Меню 'Стройматериалы' не открылось"
+        assert catalog_page.get_catalog_stroymateriali_text() == "Стройматериалы", "Меню 'Стройматериалы' " \
+                                                                                   "не отображается"
+        assert catalog_page.get_navigation_glavnaya_catalog_text()[0].text == "Главная", "Меню навигации 'Главная' " \
+                                                                                         "не отображается"
+        assert catalog_page.get_navigation_glavnaya_catalog_text()[1].text == "Каталог", "Меню навигации 'Каталог' " \
+                                                                                         "не отображается"
