@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     software-properties-common \
     python3-launchpadlib \
     fonts-liberation \
+    jq \
     libasound2 \
     libatk-bridge2.0-0 \
     libatk1.0-0 \
@@ -38,15 +39,21 @@ RUN apt-get update && apt-get install -y \
     xdg-utils \
     libu2f-udev \
     libvulkan1 \
+    unzip \
     && rm -rf /var/lib/apt/lists/*
-# Chrome browser installation
-ARG CHROME_VERSION="114.0.5735.198-1"
-RUN curl -Lo chrome.deb https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb \
-    && apt-get update \
-    && dpkg -i ./chrome.deb || apt-get install -fy \
-    && rm chrome.deb
+
+RUN curl -L 'https://googlechromelabs.github.io/chrome-for-testing/last-known-good-versions-with-downloads.json' \
+    | jq -r '.channels.Stable.downloads|.chrome,.chromedriver|.[]|select(.platform=="linux64").url|"curl -LO \(.)"' \
+    | bash \
+    && unzip -d /usr/local/share 'chrome-linux64.zip' \
+    && ln -s /usr/local/share/chrome-linux64/chrome /usr/bin/chrome \
+    && unzip -d /usr/local/share 'chromedriver-linux64.zip' \
+    && ln -s /usr/local/share/chromedriver-linux64/chromedriver /usr/bin/chromedriver \
+    && rm 'chrome-linux64.zip' && rm 'chromedriver-linux64.zip'
+
 # Check chrome version
-RUN echo "Chrome: " && google-chrome --version
+RUN echo -e "Chrome: $(chrome --version) \nChromedriver: $(chromedriver --version) "
+
 # Allure installation
 RUN curl -o allure-commandline-2.23.0.tgz -Ls https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.23.0/allure-commandline-2.23.0.tgz \
     && tar -zxvf allure-commandline-2.23.0.tgz -C /opt/ \

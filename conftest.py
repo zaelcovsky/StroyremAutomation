@@ -16,21 +16,22 @@ from pages.main_page import MainPage
 def driver():
     print('\nstart browser...')
     chrome_options = Options()
+    # print()
     if 'CI' in os.environ:
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        driver = webdriver.Chrome(options=chrome_options)
         driver.set_window_size(1382, 754)
     elif 'DOCKERRUN' in os.environ:
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+        driver = webdriver.Chrome(options=chrome_options)
         driver.set_window_size(1382, 754)
     else:
         chrome_options.add_argument('--headless')
-        driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        driver = webdriver.Chrome(options=chrome_options)
     yield driver
     print('\nquit browser...')
     driver.quit()
