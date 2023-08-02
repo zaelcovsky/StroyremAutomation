@@ -38,7 +38,7 @@ class SeleniumBase:
         self.go_to_element(self.element_is_present(locator))
         return self.__wait.until(EC.visibility_of_element_located(locator))
 
-    def elements_are_visible(self, locator, timeout=5):
+    def elements_are_visible(self, locator):
         """
         Ожидает проверку, что элементы присутствуют в DOM-дереве, видны и отображаются на странице.
         Видимость означает, что элементы не только отображаются,
@@ -59,7 +59,7 @@ class SeleniumBase:
         """
         return self.__wait.until(EC.presence_of_element_located(locator))
 
-    def elements_are_present(self, locator, timeout=5):
+    def elements_are_present(self, locator):
         """
         Ожидает проверку, что элементы присутствуют в DOM-дереве, но не обязательно,
         что видны и отображаются на странице.
