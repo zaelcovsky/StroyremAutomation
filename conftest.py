@@ -21,17 +21,20 @@ def driver():
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
-        driver = webdriver.Chrome(options=chrome_options)
+        # driver = webdriver.Chrome(options=chrome_options)
+        driver = webdriver.Chrome(service=Service(), options=chrome_options)
         driver.set_window_size(1382, 754)
     elif 'DOCKERRUN' in os.environ:
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
-        driver = webdriver.Chrome(options=chrome_options)
+        # driver = webdriver.Chrome(options=chrome_options)
+        driver = webdriver.Chrome(service=Service(), options=chrome_options)
         driver.set_window_size(1382, 754)
     else:
         chrome_options.add_argument('--headless')
-        driver = webdriver.Chrome(options=chrome_options)
+        # driver = webdriver.Chrome(options=chrome_options)
+        driver = webdriver.Chrome(service=Service())
     yield driver
     print('\nquit browser...')
     driver.quit()
