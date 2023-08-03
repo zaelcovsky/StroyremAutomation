@@ -1,6 +1,5 @@
 import pytest
 import allure
-from tests.catalog.conftest import catalog_page_open
 from constants import MAIN_PAGE_STAGE_URL, MAIN_PAGE_PROD_URL
 
 
