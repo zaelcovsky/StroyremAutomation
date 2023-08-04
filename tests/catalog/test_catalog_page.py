@@ -3,6 +3,7 @@ import allure
 from selenium.common import TimeoutException
 from constants import MAIN_PAGE_STAGE_URL, MAIN_PAGE_PROD_URL
 from tests.catalog.catalog_constants import *
+from pages.catalog_page import CatalogPage
 
 
 @allure.epic("Catalog Page")
@@ -54,3 +55,17 @@ class TestCatalogPage:
             f"Меню навигации '{CATALOG_PAGE_MAIN_LINK}' не отображается"
         assert catalog_page_open.get_navigation_main_catalog_text()[1].text == CATALOG_PAGE_CATALOG_LINK, \
             f"Меню навигации '{CATALOG_PAGE_CATALOG_LINK}' не отображается"
+
+    @allure.title("004_positive_alfabet_plaster_mixtures_smoke")
+    @pytest.mark.xfail(reason='Неверная сортировка')
+    @pytest.mark.parametrize('link', [SHTUKATURNYE_SMESI_PAGE_PROD_URL, SHTUKATURNYE_SMESI_PAGE_STAGE_URL])
+    @pytest.mark.smoke_test
+    def test_004_positive_alfabet_plaster_mixtures_smoke(self, driver, link):
+        page = CatalogPage(driver)
+        driver.get(link)
+        page.get_sort_name_link_a_z().click()
+        list_a_z = [item.text for item in page.get_list_shtukaturnye_smesi() if item.text != '']
+        assert list_a_z == sorted(list_a_z), "Список не отсортирован от А до Я"
+        page.get_sort_name_link_z_a().click()
+        list_z_a = [item.text for item in page.get_list_shtukaturnye_smesi() if item.text != '']
+        assert list_z_a == sorted(list_z_a, reverse=True), "Список не отсортирован от Я до А"

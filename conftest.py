@@ -3,8 +3,6 @@ import shutil
 import allure
 import pytest
 from selenium import webdriver
-from selenium.webdriver.support.wait import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from pages.basket_page import BasketPage
@@ -21,20 +19,18 @@ def driver():
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
-        # driver = webdriver.Chrome(options=chrome_options)
         driver = webdriver.Chrome(service=Service(), options=chrome_options)
         driver.set_window_size(1382, 754)
     elif 'DOCKERRUN' in os.environ:
         chrome_options.add_argument('--headless')
         chrome_options.add_argument('--no-sandbox')
         chrome_options.add_argument('--disable-dev-shm-usage')
-        # driver = webdriver.Chrome(options=chrome_options)
         driver = webdriver.Chrome(service=Service(), options=chrome_options)
         driver.set_window_size(1382, 754)
     else:
         chrome_options.add_argument('--headless')
-        # driver = webdriver.Chrome(options=chrome_options)
         driver = webdriver.Chrome(service=Service())
+        driver.implicitly_wait(10)
     yield driver
     print('\nquit browser...')
     driver.quit()

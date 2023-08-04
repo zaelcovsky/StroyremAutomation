@@ -1,3 +1,6 @@
+SHTUKATURNYE_SMESI_PAGE_PROD_URL = "https://stroyrem-nn.ru/catalog/shtukaturnye-smesi"
+SHTUKATURNYE_SMESI_PAGE_STAGE_URL = "https://test2.stroyrem-nn.ru/catalog/shtukaturnye-smesi"
+
 CATALOG_PAGE_BUILDING_MATERIALS_TITLE = "Стройматериалы"
 CATALOG_PAGE_MAIN_LINK = "Главная"
 CATALOG_PAGE_CATALOG_LINK = "Каталог"

@@ -20,6 +20,9 @@ class CatalogPage(SeleniumBase):
         self._garden_tools_shovels_link = (By.CSS_SELECTOR, "[data-id='1128']")
         self._main_catalog_tools_shovels_link = (By.CSS_SELECTOR, ".block.content-container .breadcrumb a")
         self._picture_building_materials = (By.CSS_SELECTOR, ".mcm-img [data-id='182'] img")
+        self._sort_name_link_a_z = (By.CSS_SELECTOR, ".catalog-sort.sort-desc[data-test]")
+        self._sort_name_link_z_a = (By.CSS_SELECTOR, ".catalog-sort.sort-asc[data-test]")
+        self._list_shtukaturnye_smesi = (By.CSS_SELECTOR, "a.pc-link")
 
     @allure.step("Получение текста заголовка страницы")
     def get_page_title_text(self):
@@ -68,3 +71,15 @@ class CatalogPage(SeleniumBase):
     @allure.step("Проверяем что картинка 'Стройматериалы' видна на странице")
     def get_picture_building_materials(self):
         return self.element_is_visible(self._picture_building_materials)
+
+    @allure.step("Проверяем что ссылка 'По названию А - Я' видна на странице")
+    def get_sort_name_link_a_z(self):
+        return self.element_is_visible(self._sort_name_link_a_z)
+
+    @allure.step("Проверяем что ссылка 'По названию Я - А' видна на странице")
+    def get_sort_name_link_z_a(self):
+        return self.element_is_visible(self._sort_name_link_z_a)
+
+    @allure.step("Проверяем что товары из раздела 'Штукатурные смеси' видны на странице")
+    def get_list_shtukaturnye_smesi(self):
+        return self.elements_are_present(self._list_shtukaturnye_smesi)
