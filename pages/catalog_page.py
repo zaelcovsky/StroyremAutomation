@@ -9,7 +9,7 @@ class CatalogPage(SeleniumBase):
         super().__init__(driver)
         self.driver = driver
         self._header_catalog_menu = (By.CSS_SELECTOR, "a.header-catalog-menu_link")
-        self._building_materials_link = (By.XPATH, "//a[contains(text(),'Стройматериалы')]")
+        self._building_materials_link = (By.CSS_SELECTOR, ".mcm-to-screen.mcm-name[data-id='182']")
         self._building_materials = (By.CSS_SELECTOR, "#mcm-screen-182 span:nth-child(2)")
         self._main_catalog = (By.CSS_SELECTOR, "#mcm-screen-182 .breadcrumb span:nth-child(1)")
         self._main_catalog_tools = (By.CSS_SELECTOR, "#mcm-screen-1127 .breadcrumb span:nth-child(1)")
@@ -19,6 +19,7 @@ class CatalogPage(SeleniumBase):
         self._garden_tools_title = (By.CSS_SELECTOR, "#mcm-screen-1127 span:nth-child(2)")
         self._garden_tools_shovels_link = (By.CSS_SELECTOR, "[data-id='1128']")
         self._main_catalog_tools_shovels_link = (By.CSS_SELECTOR, ".block.content-container .breadcrumb a")
+        self._picture_building_materials = (By.CSS_SELECTOR, ".mcm-img [data-id='182'] img")
 
     @allure.step("Получение текста заголовка страницы")
     def get_page_title_text(self):
@@ -63,3 +64,7 @@ class CatalogPage(SeleniumBase):
     @allure.step("Проверяем что элемент 'Лопаты' виден на странице")
     def get_link_garden_tools_shovels(self):
         return self.element_is_visible(self._garden_tools_shovels_link)
+
+    @allure.step("Проверяем что картинка 'Стройматериалы' видна на странице")
+    def get_picture_building_materials(self):
+        return self.element_is_visible(self._picture_building_materials)
