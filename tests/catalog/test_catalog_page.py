@@ -41,7 +41,7 @@ class TestCatalogPage:
         assert catalog_page_open.get_navigation_main_catalog_tools_text()[2].text == CATALOG_PAGE_TOOLS_LINK, \
             f"Меню навигации '{CATALOG_PAGE_TOOLS_LINK}' не отображается"
         catalog_page_open.get_link_garden_tools_shovels().click()
-        assert catalog_page_open.get_page_title_text() == CATALOG_PAGE_SHOVELS_TITLE, \
+        assert catalog_page_open.get_page_title().text == CATALOG_PAGE_SHOVELS_TITLE, \
             f"Заголовок '{CATALOG_PAGE_SHOVELS_TITLE}' не отображается"
 
     @allure.title("003_positive_pic_stroymateriali_smoke(catalog)")
@@ -69,3 +69,13 @@ class TestCatalogPage:
         page.get_sort_name_link_z_a().click()
         list_z_a = [item.text for item in page.get_list_shtukaturnye_smesi() if item.text != '']
         assert list_z_a == sorted(list_z_a, reverse=True), "Список не отсортирован от Я до А"
+
+    @allure.title("007_positive_catalog_first_link_smoke")
+    @pytest.mark.parametrize('link', [MAIN_PAGE_PROD_URL, MAIN_PAGE_STAGE_URL])
+    @pytest.mark.smoke_test
+    def test_007_positive_catalog_first_link_smoke(self, driver, link, catalog_page_open):
+        catalog_page_open.get_link_drywall_systems().click()
+        catalog_page_open.get_link_drywall_lists().click()
+        assert driver.current_url == f"{link}{DRYWALL_LISTS_PAGE_URL}", "Неверный адрес страницы"
+        assert catalog_page_open.get_page_title().text == CATALOG_PAGE_DRYWALL_LISTS_TITLE, \
+            f"Заголовок '{CATALOG_PAGE_DRYWALL_LISTS_TITLE}' не отображается"

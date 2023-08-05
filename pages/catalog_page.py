@@ -23,10 +23,12 @@ class CatalogPage(SeleniumBase):
         self._sort_name_link_a_z = (By.CSS_SELECTOR, ".catalog-sort.sort-desc[data-test]")
         self._sort_name_link_z_a = (By.CSS_SELECTOR, ".catalog-sort.sort-asc[data-test]")
         self._list_shtukaturnye_smesi = (By.CSS_SELECTOR, "a.pc-link")
+        self._drywall_systems = (By.CSS_SELECTOR, "a.mcm-sub-name[data-id='777']")
+        self._drywall_lists = (By.CSS_SELECTOR, "a.mcm-name[data-id='785']")
 
-    @allure.step("Получение текста заголовка страницы")
-    def get_page_title_text(self):
-        return self.driver.find_element(*self._page_title).text
+    @allure.step("Получение заголовка страницы")
+    def get_page_title(self):
+        return self.driver.find_element(*self._page_title)
 
     @allure.step("Проверяем что элемент 'Каталог товаров' виден в хедере")
     def get_header_catalog_menu(self):
@@ -83,3 +85,11 @@ class CatalogPage(SeleniumBase):
     @allure.step("Проверяем что товары из раздела 'Штукатурные смеси' видны на странице")
     def get_list_shtukaturnye_smesi(self):
         return self.elements_are_present(self._list_shtukaturnye_smesi)
+
+    @allure.step("Проверяем что ссылка 'Гипсокартонные системы' видна на странице")
+    def get_link_drywall_systems(self):
+        return self.element_is_visible(self._drywall_systems)
+
+    @allure.step("Проверяем что ссылка 'ГИПСОКАРТОННЫЕ ЛИСТЫ (ГКЛ)' видна на странице")
+    def get_link_drywall_lists(self):
+        return self.element_is_visible(self._drywall_lists)
