@@ -5,6 +5,7 @@ from selenium.webdriver import Keys
 import allure
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common import TimeoutException, StaleElementReferenceException
 
 
 class SeleniumBase:
@@ -69,24 +70,24 @@ class SeleniumBase:
     #     """
     #     return wait(self.driver, timeout).until(EC.presence_of_all_elements_located(locator))
 
-    # def element_is_not_visible(self, locator, timeout=5):
-    #     """
-    #     Ожидает проверку, является ли элемент невидимым или нет. Элемент присутствует в DOM-дереве.
-    #     Локатор - используется для поиска элемента. Возвращает WebElement.
-    #     Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
-    #     при необходимости можно будет изменить.
-    #     """
-    #     return wait(self.driver, timeout).until(EC.invisibility_of_element_located(locator))
+    def element_is_not_visible(self, locator):
+        """
+        Ожидает проверку, является ли элемент невидимым или нет. Элемент присутствует в DOM-дереве.
+        Локатор - используется для поиска элемента. Возвращает WebElement.
+        Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
+        при необходимости можно будет изменить.
+        """
+        return self.__wait.until(EC.invisibility_of_element_located(locator))
 
-    # def element_is_clickable(self, locator, timeout=5):
-    #     """
-    #     Ожидает проверку, что элемент виден, отображается на странице,
-    #     а также элемент включен. Элемент присутствует в DOM-дереве.
-    #     Локатор - используется для поиска элемента.
-    #     Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
-    #     при необходимости можно будет изменить.
-    #     """
-    #     return wait(self.driver, timeout).until(EC.element_to_be_clickable(locator))
+    def element_is_clickable(self, locator):
+        """
+        Ожидает проверку, что элемент виден, отображается на странице,
+        а также элемент включен. Элемент присутствует в DOM-дереве.
+        Локатор - используется для поиска элемента.
+        Timeout - время в течение которого он будет ожидать. По умолчанию стоит 5 секунд,
+        при необходимости можно будет изменить.
+        """
+        return self.__wait.until(EC.element_to_be_clickable(locator))
 
     def go_to_element(self, element):
         """
@@ -177,5 +178,15 @@ class SeleniumBase:
             self.driver.find_element(*locator)
             return True
         except NoSuchElementException:
+            return False
+
+    def check_element_is_not_visible(self, locator):
+        """
+        Проверка того что элемент не виден на странице
+        """
+        try:
+            self.element_is_not_visible(locator)
+            return True
+        except (TimeoutException, StaleElementReferenceException):
             return False
 
