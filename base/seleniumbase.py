@@ -95,16 +95,16 @@ class SeleniumBase:
         """
         self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
-    def action_move_to_element(self, element):
-        """
-        Двигает курсор мышки на середину выбранного элемента
-        Имитирует hover.
-        Можно использовать для проверки интерактивности элемента при наведении
-        курсора мышки на элемент.
-        """
-        action = ActionChains(self.driver)
-        action.move_to_element(element)
-        action.perform()
+    # def action_move_to_element(self, element):
+    #     """
+    #     Двигает курсор мышки на середину выбранного элемента
+    #     Имитирует hover.
+    #     Можно использовать для проверки интерактивности элемента при наведении
+    #     курсора мышки на элемент.
+    #     """
+    #     action = ActionChains(self.driver)
+    #     action.move_to_element(element)
+    #     action.perform()
 
     # def press_enter_button(self):
     #     """
@@ -126,12 +126,12 @@ class SeleniumBase:
     #     """
     #     self.driver.switch_to.window(self.driver.window_handles[1])
 
-    def scroll_to_the_element(self, locator):
-        """
-        Скроллит до указанного элемента.
-        """
-        element = self.driver.find_element(*locator)
-        self.driver.execute_script("arguments[0].scrollIntoView();", element)
+    # def scroll_to_the_element(self, locator):
+    #     """
+    #     Скроллит до указанного элемента.
+    #     """
+    #     element = self.driver.find_element(*locator)
+    #     self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
     # def scroll_down_the_page(self):
     #     """

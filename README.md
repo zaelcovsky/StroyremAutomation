@@ -5,6 +5,7 @@
 #Потоки 
 #запуск тестов на проде и на stage
 
+
 ### Запуск тестов в Docker
 - ```docker build -t stroyremautomation:0.0.1 .```
 - ```docker run -p 9999:9999 stroyremautomation:0.0.1```  
@@ -21,3 +22,4 @@
 - ```exit```
 
 [![Allure-report](https://img.shields.io/badge/Allure%20Report-deployed-green)](https://victoretc.github.io/StroyremAutomation/)
+
