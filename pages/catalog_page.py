@@ -9,7 +9,7 @@ class CatalogPage(SeleniumBase):
         super().__init__(driver)
         self.driver = driver
         self._header_catalog_menu = (By.CSS_SELECTOR, "a.header-catalog-menu_link")
-        self._building_materials_link = (By.XPATH, "//a[contains(text(),'Стройматериалы')]")
+        self._building_materials_link = (By.CSS_SELECTOR, ".mcm-to-screen.mcm-name[data-id='182']")
         self._building_materials = (By.CSS_SELECTOR, "#mcm-screen-182 span:nth-child(2)")
         self._main_catalog = (By.CSS_SELECTOR, "#mcm-screen-182 .breadcrumb span:nth-child(1)")
         self._main_catalog_tools = (By.CSS_SELECTOR, "#mcm-screen-1127 .breadcrumb span:nth-child(1)")
@@ -19,10 +19,16 @@ class CatalogPage(SeleniumBase):
         self._garden_tools_title = (By.CSS_SELECTOR, "#mcm-screen-1127 span:nth-child(2)")
         self._garden_tools_shovels_link = (By.CSS_SELECTOR, "[data-id='1128']")
         self._main_catalog_tools_shovels_link = (By.CSS_SELECTOR, ".block.content-container .breadcrumb a")
+        self._picture_building_materials = (By.CSS_SELECTOR, ".mcm-img [data-id='182'] img")
+        self._sort_name_link_a_z = (By.CSS_SELECTOR, ".catalog-sort.sort-desc[data-test]")
+        self._sort_name_link_z_a = (By.CSS_SELECTOR, ".catalog-sort.sort-asc[data-test]")
+        self._list_shtukaturnye_smesi = (By.CSS_SELECTOR, "a.pc-link")
+        self._drywall_systems = (By.CSS_SELECTOR, "a.mcm-sub-name[data-id='777']")
+        self._drywall_lists = (By.CSS_SELECTOR, "a.mcm-name[data-id='785']")
 
-    @allure.step("Получение текста заголовка страницы")
-    def get_page_title_text(self):
-        return self.driver.find_element(*self._page_title).text
+    @allure.step("Получение заголовка страницы")
+    def get_page_title(self):
+        return self.driver.find_element(*self._page_title)
 
     @allure.step("Проверяем что элемент 'Каталог товаров' виден в хедере")
     def get_header_catalog_menu(self):
@@ -63,3 +69,27 @@ class CatalogPage(SeleniumBase):
     @allure.step("Проверяем что элемент 'Лопаты' виден на странице")
     def get_link_garden_tools_shovels(self):
         return self.element_is_visible(self._garden_tools_shovels_link)
+
+    @allure.step("Проверяем что картинка 'Стройматериалы' видна на странице")
+    def get_picture_building_materials(self):
+        return self.element_is_visible(self._picture_building_materials)
+
+    @allure.step("Проверяем что ссылка 'По названию А - Я' видна на странице")
+    def get_sort_name_link_a_z(self):
+        return self.element_is_visible(self._sort_name_link_a_z)
+
+    @allure.step("Проверяем что ссылка 'По названию Я - А' видна на странице")
+    def get_sort_name_link_z_a(self):
+        return self.element_is_visible(self._sort_name_link_z_a)
+
+    @allure.step("Проверяем что товары из раздела 'Штукатурные смеси' видны на странице")
+    def get_list_shtukaturnye_smesi(self):
+        return self.elements_are_present(self._list_shtukaturnye_smesi)
+
+    @allure.step("Проверяем что ссылка 'Гипсокартонные системы' видна на странице")
+    def get_link_drywall_systems(self):
+        return self.element_is_visible(self._drywall_systems)
+
+    @allure.step("Проверяем что ссылка 'ГИПСОКАРТОННЫЕ ЛИСТЫ (ГКЛ)' видна на странице")
+    def get_link_drywall_lists(self):
+        return self.element_is_visible(self._drywall_lists)
