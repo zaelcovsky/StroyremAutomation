@@ -57,7 +57,7 @@ class MainPage(SeleniumBase):
         self._telephone_number_link = (By.XPATH, "//a[@class='footer-phone']")
 
     # находим element, но не проводим тесты над ним
-    @allure.step("Проверяем что элемент _terrestrially_section виден на странице")
+    @allure.step("Проверяем что элемент _stroimaterialy_section виден на странице")
     def get_stroimaterialy_section(self):
         return self.element_is_visible(self._stroimaterialy_section)
 
