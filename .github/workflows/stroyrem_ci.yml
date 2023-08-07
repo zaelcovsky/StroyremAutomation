@@ -16,7 +16,6 @@ jobs:
           sudo docker build -t stroyrem .
       - name: docker run
         run: |
-          cp $CREDENTIALS /data/credentials.py
           sudo docker run -v $PWD/allure_result:/app/allure_result stroyrem \
             pytest -s -v --alluredir=allure_result tests/
 
