@@ -121,7 +121,7 @@ class TestMainPage:
     def test_positive_footer_new_in_stock_smoke(self, main_page):
         catalog_page = CatalogPage(main_page.driver)
         main_page.check_new_in_stock_link()
-        assert catalog_page.get_page_title_text() == "Новинки", "Заголовок страницы не верен"
+        assert catalog_page.get_page_title().text == "Новинки", "Заголовок страницы не верен"
 
     @allure.feature("Footer functionality")
     @allure.title("TC 014 - Проверка функциональности ссылки 'Оплатить заказ'")
