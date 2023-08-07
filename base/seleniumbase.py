@@ -190,3 +190,9 @@ class SeleniumBase:
         except (TimeoutException, StaleElementReferenceException):
             return False
 
+    def check_number_of_windows_to_be_equal(self, number):
+        """
+        Ожидает проверку того что количество открытых окон в браузере равно заданному значению (number)
+        """
+        return self.__wait.until(EC.number_of_windows_to_be(number))
+

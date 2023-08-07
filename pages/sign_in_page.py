@@ -100,11 +100,11 @@ class SignInPage(SeleniumBase):
     def get_mail_auth_icon(self):
         return self.find_element(self._mail_auth_icon)
 
-    @allure.step("Нахождение элемента: поле Email окна авторизации через 'mail.ru'")
+    @allure.step("Нахождение элемента: поле 'Email' окна авторизации через 'mail.ru'")
     def get_mail_ru_window_email_field(self):
         return self.find_element(self._mail_ru_window_email_field)
 
-    @allure.step("Нахождение элемента: поле Email окна авторизации через 'mail.ru'")
+    @allure.step("Нахождение элемента: поле 'Пароль' окна авторизации через 'mail.ru'")
     def get_mail_ru_window_password_field(self):
         return self.find_element(self._mail_ru_window_password_field)
 
@@ -124,21 +124,101 @@ class SignInPage(SeleniumBase):
     def get_account_page_email_field(self):
         return self.find_element(self._account_page_email_field)
 
-    @allure.step("Нахождение элемента: логотип 'Стройрем' на окне авторизации")
+    @allure.step("Нахождение элемента: логотип 'Стройрем' окна авторизации")
     def get_authorization_window_logo(self):
         return self.find_element(self._authorization_window_logo)
 
-    @allure.step("Проверка невидимости элемента: логотип 'Стройрем' на окне авторизации")
+    @allure.step("Проверка невидимости элемента: логотип 'Стройрем' окна авторизации")
     def check_authorization_window_logo_is_not_visible(self):
         return self.check_element_is_not_visible(self._authorization_window_logo)
 
-    @allure.step("Нахождение элемента: ссылка 'Забыли пароль?' на окне авторизации")
+    @allure.step("Нахождение элемента: ссылка 'Забыли пароль?' окна авторизации")
     def get_forgot_password_link(self):
         return self.find_element(self._forgot_password_link)
 
     @allure.step("Нахождение элемента: заголовок страницы восстановления пароля")
     def get_restore_password_page_heading(self):
         return self.find_element(self._restore_password_page_heading)
+
+    @allure.step("Нахождение элемента: иконка 'OK.ru' окна авторизации")
+    def get_ok_ru_auth_icon(self):
+        return self.find_element(self._ok_auth_icon)
+
+    @allure.step("Нахождение элемента: поле 'Email' окна авторизации через 'OK.ru'")
+    def get_ok_ru_window_email_field(self):
+        return self.find_element(self._ok_ru_window_email_field)
+
+    @allure.step("Нахождение элемента: поле 'Пароль' окна авторизации через 'OK.ru'")
+    def get_ok_ru_window_password_field(self):
+        return self.find_element(self._ok_ru_window_password_field)
+
+    @allure.step("Нахождение элемента: кнопка 'Войти' окна авторизации через 'OK.ru'")
+    def get_ok_ru_window_submit_button(self):
+        return self.find_element(self._ok_ru_window_submit_button)
+
+    @allure.step("Нахождение элемента: иконка 'vk.ru' окна авторизации")
+    def get_vk_ru_auth_icon(self):
+        return self.find_element(self._vk_auth_icon)
+
+    @allure.step("Проверка кликабельности элемента: поле 'Email' окна авторизации через 'vk.ru'")
+    def get_vk_ru_window_email_field(self):
+        return self.element_is_clickable(self._vk_ru_window_email_field)
+
+    @allure.step("Проверка кликабельности элемента: поле 'Пароль' окна авторизации через 'vk.ru'")
+    def get_vk_ru_window_password_field(self):
+        return self.element_is_clickable(self._vk_ru_window_password_field)
+
+    @allure.step("Проверка кликабельности элемента: кнопка 'Войти' окна авторизации через 'vk.ru'")
+    def get_vk_ru_window_submit_button(self):
+        return self.element_is_clickable(self._vk_ru_window_submit_button)
+
+    @allure.step("Нахождение элемента: кнопка 'Продолжить' окна авторизации через 'vk.ru'")
+    def get_vk_ru_window_proceed_button(self):
+        return self.find_element(self._vk_ru_window_proceed_button)
+
+    @allure.step("Проверка кликабельности элемента: кнопка 'Продолжить как' окна авторизации через 'vk.ru'")
+    def get_vk_ru_window_continue_as_button(self):
+        return self.element_is_clickable(self._vk_ru_window_continue_as_button)
+
+    @allure.step("Нахождение элемента: иконка 'ya.ru' окна авторизации")
+    def get_ya_ru_auth_icon(self):
+        return self.find_element(self._ya_auth_icon)
+
+    @allure.step("Проверка кликабельности элемента: кнопка 'Другие способы входа' окна авторизации через 'ya.ru'")
+    def get_ya_ru_window_alternative_ways_to_sign_up(self):
+        return self.element_is_clickable(self._ya_ru_window_alternative_ways_to_sign_up)
+
+    @allure.step("Проверка кликабельности элемента: поле 'Email' окна авторизации через 'ya.ru'")
+    def get_ya_ru_window_email_field(self):
+        return self.element_is_clickable(self._ya_ru_window_email_field)
+
+    @allure.step("Проверка кликабельности элемента: поле 'Пароль' окна авторизации через 'ya.ru'")
+    def get_ya_ru_window_password_field(self):
+        return self.element_is_clickable(self._ya_ru_window_password_field)
+
+    @allure.step("Нахождение элемента: кнопка 'Войти' окна авторизации через 'ya.ru'")
+    def get_ya_ru_window_submit_button(self):
+        return self.find_element(self._ya_ru_window_submit_button)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

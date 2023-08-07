@@ -1,6 +1,6 @@
 import pytest
 from pages.sign_in_page import SignInPage
-from constants import MAIN_PAGE_STAGE_URL, ACCOUNT_PAGE, MAIN_PAGE_PROD_URL
+from constants import *
 from selenium.webdriver.common.action_chains import ActionChains
 
 
@@ -20,5 +20,4 @@ def open_sign_in_window(driver, sign_in_page):
     action = ActionChains(driver)
     sign_in_button = sign_in_page.element_is_clickable(sign_in_page._main_page_sign_in_button)
     action.move_to_element(sign_in_button).click().perform()
-
 
