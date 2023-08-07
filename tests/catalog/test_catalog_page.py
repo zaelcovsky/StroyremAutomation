@@ -98,4 +98,4 @@ class TestCatalogPage:
         list_min_max = [int(item.text[:-2]) for item in page.get_list_price() if item.text != '']
         print('По возрастанию:')
         print(list_min_max, sorted(list_min_max), sep='\n')
-        assert list_min_max == sorted(list_min_max), "Список по возрастанию не отсортирован"
+        assert list_min_max == sorted(list_min_max), "Список не отсортирован по возрастанию"
