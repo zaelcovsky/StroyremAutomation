@@ -1,8 +1,7 @@
 import pytest
 import allure
 from constants import *
-from data.credentials import credentials
-from tests.test_sign_in.conftest import get_name_and_email_in_account
+# from data.credentials import credentials
 from tests.test_sign_in.constants_sign_in_page import *
 from time import sleep
 
