@@ -1,7 +1,7 @@
 import pytest
 import allure
 from constants import MAIN_PAGE_STAGE_URL, ACCOUNT_PAGE, MAIN_PAGE_PROD_URL, RESTORE_PASSWORD_PAGE
-from data.credentials import credentials
+# from data.credentials import credentials
 from tests.test_sign_in.constants_sign_in_page import *
 
 
@@ -38,6 +38,8 @@ class TestSignInPage:
         sign_in_page.get_authorization_window_logo().click()
         assert sign_in_page.check_authorization_window_logo_is_not_visible() is True, \
             "Главная страница не отображается"
+
+
 
 
 
