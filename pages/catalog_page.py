@@ -25,6 +25,8 @@ class CatalogPage(SeleniumBase):
         self._list_shtukaturnye_smesi = (By.CSS_SELECTOR, "a.pc-link")
         self._drywall_systems = (By.CSS_SELECTOR, "a.mcm-sub-name[data-id='777']")
         self._drywall_lists = (By.CSS_SELECTOR, "a.mcm-name[data-id='785']")
+        self._sort_price_link = (By.XPATH, "//a[contains(text(), 'По цене')]")
+        self._list_price = (By.CSS_SELECTOR, ".price-variant.active")
 
     @allure.step("Получение заголовка страницы")
     def get_page_title(self):
@@ -93,3 +95,11 @@ class CatalogPage(SeleniumBase):
     @allure.step("Проверяем что ссылка 'ГИПСОКАРТОННЫЕ ЛИСТЫ (ГКЛ)' видна на странице")
     def get_link_drywall_lists(self):
         return self.element_is_visible(self._drywall_lists)
+
+    @allure.step("Проверяем что ссылка 'По цене...' видна на странице")
+    def get_sort_price_link(self):
+        return self.element_is_visible(self._sort_price_link)
+
+    @allure.step("Проверяем что цена товаров из раздела 'Штукатурные смеси' видна на странице")
+    def get_list_price(self):
+        return self.elements_are_present(self._list_price)
