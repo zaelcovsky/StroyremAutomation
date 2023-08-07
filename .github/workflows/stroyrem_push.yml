@@ -16,7 +16,6 @@ jobs:
           sudo docker build -t stroyrem .
       - name: docker run
         run: |
-          chmod +w /data/credentials.py
-          echo "$CREDENTIALS" > /data/credentials.py
+          echo "${{ secrets.CREDENTIALS }}" > .env
           sudo docker run --rm stroyrem pytest -s -v tests/
 
