@@ -10,9 +10,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: setup 
+        run: |
+        cp $CREDENTIALS /data/credentials.py
       - name: docker build
         run: |
           sudo docker build -t stroyrem .
       - name: docker run
         run: |
           sudo docker run --rm stroyrem pytest -s -v tests/
+      
