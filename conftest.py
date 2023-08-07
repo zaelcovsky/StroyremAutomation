@@ -30,6 +30,7 @@ def driver():
     else:
         chrome_options.add_argument('--headless')
         driver = webdriver.Chrome(service=Service())
+        driver.maximize_window()
         driver.implicitly_wait(10)
     yield driver
     print('\nquit browser...')
