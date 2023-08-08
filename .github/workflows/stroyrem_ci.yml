@@ -14,14 +14,18 @@ jobs:
       - name: Create credentials.py file
         run: |
           echo $PWD
-          echo "${{ secrets.STROYREM_CREDENTIALS }}" > data/credentials.py
+          echo ls
+          sudo echo "${{ secrets.STROYREM_CREDENTIALS }}" > data/credentials.py
+          cd data/
+          echo $PWD
+          echo ls
       - name: docker build
         run: |
           sudo docker build -t stroyrem .
       - name: docker run
         run: |
           sudo docker run -v $PWD/allure_result:/app/allure_result stroyrem \
-            pytest -s -v --alluredir=allure_result tests/
+            pytest -s -v tests/test_sign_in/ --alluredir=allure_result tests/
 
       - name: Get Allure history
         uses: actions/checkout@v2
