@@ -1,6 +1,6 @@
 # Главная страница на проде
 MAIN_PAGE_PROD_URL = "https://stroyrem-nn.ru/"
-# Главная страница на test
+# Главная страница на стейдже
 MAIN_PAGE_STAGE_URL = "https://test2.stroyrem-nn.ru/"
 MAIN_PAGE_TITLE = "Стройматериалы"
 # Страница личного кабинета

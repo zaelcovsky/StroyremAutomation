@@ -19,6 +19,7 @@ jobs:
           cd data/
           echo $PWD
           ls
+          cat credentials.py
       - name: docker build
         run: |
           sudo docker build -t stroyrem .

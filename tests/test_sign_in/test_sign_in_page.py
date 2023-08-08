@@ -1,7 +1,8 @@
 import pytest
 import allure
 from constants import *
-# from data.credentials import credentials
+from data.credentials import credentials
+from tests.test_sign_in.conftest import get_name_and_email_in_account
 from tests.test_sign_in.constants_sign_in_page import *
 from time import sleep
 
@@ -137,22 +138,10 @@ class TestSignInPage:
         sign_in_page.get_password_field().send_keys(credentials['password'])
         sign_in_page.get_sign_in_button().click()
         assert driver.current_url == ACCOUNT_PAGE, f"Неправильный url страницы: {driver.current_url}"
-        driver.get(PERSONAL_DATA_PAGE)
-        sign_in_page.get_account_page_fizik_section().click()
-        name = sign_in_page.get_account_page_name_field().get_attribute('value')
-        email = sign_in_page.get_account_page_email_field().get_attribute('value')
+        # driver.get(PERSONAL_DATA_PAGE)
+        # sign_in_page.get_account_page_fizik_section().click()
+        # name = sign_in_page.get_account_page_name_field().get_attribute('value')
+        # email = sign_in_page.get_account_page_email_field().get_attribute('value')
+        name, email = get_name_and_email_in_account(driver, sign_in_page)
         assert name == credentials['name'] and email == credentials['email'], \
             f"ФИО или email не соответствуют ожидаемым, ФИО: {name}, email: {email}"
-
-
-
-
-
-
-
-
-
-
-
-
-

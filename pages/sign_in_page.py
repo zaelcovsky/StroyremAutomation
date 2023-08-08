@@ -199,32 +199,3 @@ class SignInPage(SeleniumBase):
     @allure.step("Нахождение элемента: кнопка 'Войти' окна авторизации через 'ya.ru'")
     def get_ya_ru_window_submit_button(self):
         return self.find_element(self._ya_ru_window_submit_button)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
