@@ -1,0 +1,6 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Aug 08 17:59:16 GMT 2023","Tue Aug 08 17:59:17 GMT 2023","340","tests.test_sign_in","test_sign_in_page","TestSignInPage","","","Проверка открытия тултипа с кнопками 'Войти' и 'Регистрация' и открытия окна авторизации",""
+"passed","Tue Aug 08 17:59:26 GMT 2023","Tue Aug 08 17:59:27 GMT 2023","1143","tests.test_sign_in","test_sign_in_page","TestSignInPage","","","Переход с окна авторизации на страницу восстановления пароля",""
+"passed","Tue Aug 08 17:59:05 GMT 2023","Tue Aug 08 17:59:07 GMT 2023","2106","tests.test_sign_in","test_sign_in_page","TestSignInPage","","","Переход со окна авторизации на главную страницу по клику на логотипе Стройрем",""
+"skipped","Tue Aug 08 17:59:50 GMT 2023","Tue Aug 08 17:59:53 GMT 2023","2877","tests.test_sign_in","test_sign_in_page","TestSignInPage","","","Авторизация с помощью аккаунта OK.ru",""
+"skipped","Tue Aug 08 17:59:37 GMT 2023","Tue Aug 08 17:59:40 GMT 2023","2667","tests.test_sign_in","test_sign_in_page","TestSignInPage","","","Авторизация с помощью аккаунта mail.ru",""
