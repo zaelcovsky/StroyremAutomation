@@ -3,6 +3,7 @@ import allure
 from selenium.common import TimeoutException
 from tests.catalog.catalog_constants import *
 from pages.catalog_page import CatalogPage
+from constants import MAIN_PAGE_STAGE_URL, MAIN_PAGE_PROD_URL
 
 
 @allure.epic("Catalog Page")
@@ -57,7 +58,8 @@ class TestCatalogPage:
 
     @allure.title("004_positive_alfabet_plaster_mixtures_smoke")
     @pytest.mark.xfail(reason='Не реализовано')
-    @pytest.mark.parametrize('link', [SHTUKATURNYE_SMESI_PAGE_PROD_URL, SHTUKATURNYE_SMESI_PAGE_STAGE_URL])
+    @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{SHTUKATURNYE_SMESI_PAGE_URL}",
+                                      f"{MAIN_PAGE_STAGE_URL}{SHTUKATURNYE_SMESI_PAGE_URL}"])
     @pytest.mark.smoke_test
     def test_004_positive_alfabet_plaster_mixtures_smoke(self, driver, link):
         page = CatalogPage(driver)
@@ -84,7 +86,8 @@ class TestCatalogPage:
             f"Заголовок '{CATALOG_PAGE_DRYWALL_LISTS_TITLE}' не отображается"
 
     @allure.title("008_positive_cost_plaster_mixtures_smoke")
-    @pytest.mark.parametrize('link', [SHTUKATURNYE_SMESI_PAGE_PROD_URL, SHTUKATURNYE_SMESI_PAGE_STAGE_URL])
+    @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{SHTUKATURNYE_SMESI_PAGE_URL}",
+                                      f"{MAIN_PAGE_STAGE_URL}{SHTUKATURNYE_SMESI_PAGE_URL}"])
     @pytest.mark.smoke_test
     def test_008_positive_cost_plaster_mixtures_smoke(self, driver, link):
         page = CatalogPage(driver)

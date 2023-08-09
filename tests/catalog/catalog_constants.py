@@ -1,9 +1,4 @@
-from constants import MAIN_PAGE_STAGE_URL, MAIN_PAGE_PROD_URL
-
-SHTUKATURNYE_SMESI_PAGE_PROD_URL = f"{MAIN_PAGE_PROD_URL}catalog/shtukaturnye-smesi"
-SHTUKATURNYE_SMESI_PAGE_STAGE_URL = f"{MAIN_PAGE_STAGE_URL}catalog/shtukaturnye-smesi"
-DRYWALL_LISTS_PAGE_PROD_URL = f"{MAIN_PAGE_PROD_URL}catalog/gipsokartonnye-listy-gkl"
-DRYWALL_LISTS_PAGE_STAGE_URL = f"{MAIN_PAGE_STAGE_URL}catalog/gipsokartonnye-listy-gkl"
+SHTUKATURNYE_SMESI_PAGE_URL = "catalog/shtukaturnye-smesi"
 DRYWALL_LISTS_PAGE_URL = "catalog/gipsokartonnye-listy-gkl"
 
 
