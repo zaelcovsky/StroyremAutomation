@@ -45,8 +45,6 @@ class TestSignInPage:
     # @pytest.mark.xfail(reason="хранение логинов/паролей не реализовано")
     @pytest.mark.smoke_test
     def test_positive_authorization_first_time_using_MAIL_smoke(self, driver, sign_in_page, open_sign_in_window):
-        print(credentials['mail.ru_email'])
-        print(credentials['mail.ru_password'])
         sign_in_page.get_mail_auth_icon().click()
         driver.switch_to.window(driver.window_handles[1])
         sign_in_page.get_mail_ru_window_email_field().send_keys(credentials['mail.ru_email'])
