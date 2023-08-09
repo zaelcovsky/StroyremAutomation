@@ -62,7 +62,7 @@ class TestSignInPage:
             f"ФИО или email не соответствуют ожидаемым, ФИО: {name}, email: {email}"
 
     @allure.title("Авторизация с помощью аккаунта OK.ru")
-    # @pytest.mark.xfail(reason="хранение логинов/паролей не реализовано")
+    @pytest.mark.xfail(reason="хранение логинов/паролей не реализовано")
     @pytest.mark.smoke_test
     def test_positive_authorization_first_time_using_OK_smoke(self, driver, sign_in_page, open_sign_in_window):
         sign_in_page.get_ok_ru_auth_icon().click()
@@ -109,7 +109,7 @@ class TestSignInPage:
             f"ФИО или email не соответствуют ожидаемым, ФИО: {name}, email: {email}"
 
     @allure.title("Авторизация с помощью аккаунта ya.ru")
-    # @pytest.mark.xfail(reason="хранение логинов/паролей не реализовано")
+    @pytest.mark.xfail(reason="хранение логинов/паролей не реализовано")
     @pytest.mark.smoke_test
     def test_positive_authorization_first_time_using_YA_smoke(self, driver, sign_in_page, open_sign_in_window):
         sign_in_page.get_ya_ru_auth_icon().click()
