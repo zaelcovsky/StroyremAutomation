@@ -3,13 +3,15 @@ from selenium.webdriver.common.by import By
 import allure
 
 
-class ShurupyPoDerevuPage(SeleniumBase):
+class ProductsOnSale(SeleniumBase):
     # в __init__ храним название локатора и его значение для необходимой страницы
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
+        self._price_first = (By.NAME, "price_first")
+        self._price_last = (By.NAME, "price_last")
         self._in_stock_products = (By.CSS_SELECTOR, "[for='in_stock_products'] span")
-        self._pc_price_list = (By.CSS_SELECTOR, "div.pc-price")  #
+        self._pc_price = (By.XPATH, "(//div[contains(text(), 'p')])[1]")
         self._add_to_cart_btn = (By.XPATH, "(//a[contains(@class, 'add-to-cart')])[1]")
         self._header_cart_link_active = (By.CSS_SELECTOR, "a.header-cart-link.active")
         self._show_modal = (By.CSS_SELECTOR, ".total-block .show-modal")
@@ -19,14 +21,23 @@ class ShurupyPoDerevuPage(SeleniumBase):
         self._checkout_to_step_2 = (By.CSS_SELECTOR, "#fiz .checkout-to-step-2")
         self._products_total = (By.CSS_SELECTOR, "#delivery-service .modal-products-total")
         self._products_sale = (By.XPATH, "//span[text()='Скидка']")
+        self._discount_price = (By.CSS_SELECTOR, "#delivery-service .modal-discount-price")
+
+    @allure.step("Проверяем видимость поля 'ЦЕНА от'")
+    def get_field_price_first(self):
+        return self.element_is_visible(self._price_first)
+
+    @allure.step("Проверяем видимость поля 'ЦЕНА до'")
+    def get_field_price_last(self):
+        return self.element_is_visible(self._price_last)
 
     @allure.step("Проверяем видимость кнопки 'На складе'")
     def get_in_stock_products_link(self):
         return self.element_is_visible(self._in_stock_products)
 
     @allure.step("Проверяем видимость цены товара")
-    def get_pc_price_list(self):
-        return self.elements_are_present(self._pc_price_list)
+    def get_pc_price(self):
+        return self.element_is_visible(self._pc_price)
 
     @allure.step("Проверяем видимость кнопки 'В корзину'")
     def get_add_to_cart_btn(self):
@@ -63,3 +74,12 @@ class ShurupyPoDerevuPage(SeleniumBase):
     @allure.step("Проверяем что нет поля 'Скидка'")
     def cant_get_field_sale(self):
         return self.element_is_not_visible(self._products_sale)
+
+    @allure.step("Проверяем наличие поля 'Скидка'")
+    def get_field_sale(self):
+        return self.element_is_visible(self._products_sale)
+
+    @allure.step("Проверяем видимость значения поля 'Скидка'")
+    def get_discount_price(self):
+        return self.element_is_visible(self._discount_price)
+
