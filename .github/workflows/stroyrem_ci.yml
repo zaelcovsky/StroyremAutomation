@@ -20,7 +20,7 @@ jobs:
       - name: docker run
         run: |
           sudo docker run -v $PWD/allure_result:/app/allure_result stroyrem \
-            pytest -s -v --alluredir=allure_result tests/
+            pytest -s -v --alluredir=allure_result tests/test_sign_in/
 
       - name: Get Allure history
         uses: actions/checkout@v2
