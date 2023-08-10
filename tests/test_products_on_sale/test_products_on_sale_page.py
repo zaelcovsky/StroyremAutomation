@@ -19,7 +19,7 @@ class TestProductsOnSalePage:
         page.get_field_price_first().send_keys(0)
         page.get_field_price_last().send_keys(49)
         page.get_in_stock_products_link().click()
-        time.sleep(10)
+        time.sleep(1)
         price = (float(page.get_pc_price().text[:-2]))
         page.get_add_to_cart_btn().click()
         page.get_header_cart_link_active().click()
@@ -42,7 +42,7 @@ class TestProductsOnSalePage:
         page.get_field_price_first().send_keys(10000)
         page.get_field_price_last().send_keys(14999)
         page.get_in_stock_products_link().click()
-        time.sleep(10)
+        time.sleep(1)
         price = (float(page.get_pc_price().text[:-2].replace(' ', '')))
         page.get_add_to_cart_btn().click()
         page.get_header_cart_link_active().click()
@@ -60,14 +60,14 @@ class TestProductsOnSalePage:
     @allure.title("positive_check_discount_displayed_for_unauthorized_customer_for_amount_15000rub_and_above_smoke")
     @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{RASTVORONASOSY_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{RASTVORONASOSY_PAGE_URL}"])
-    @pytest.mark.xfail(reazon="Разная цена товара в каталоге и на карточке товара")
+    @pytest.mark.xfail(strict=True)  # Ждем исправление бага - Разная цена товара в каталоге и на карточке товара
     @pytest.mark.smoke_test
     def test_positive_check_discount_for_unauthorized_customer_for_amount_15000rub_and_above_smoke(self, driver, link):
         page = ProductsOnSale(driver)
         driver.get(link)
         page.get_field_price_first().send_keys(15000)
         page.get_field_price_last().click()
-        time.sleep(10)
+        time.sleep(1)
         price = (float(page.get_pc_price().text[:-2].replace(' ', '')))
         page.get_add_to_cart_btn().click()
         page.get_header_cart_link_active().click()
@@ -92,7 +92,7 @@ class TestProductsOnSalePage:
         page.get_field_price_first().send_keys(3500)
         page.get_field_price_last().send_keys(4999)
         page.get_in_stock_products_link().click()
-        time.sleep(10)
+        time.sleep(1)
         price = (float(page.get_pc_price().text[:-2].replace(' ', '')))
         page.get_add_to_cart_btn().click()
         page.get_header_cart_link_active().click()
