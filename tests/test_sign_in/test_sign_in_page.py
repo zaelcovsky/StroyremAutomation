@@ -140,6 +140,7 @@ class TestSignInPage:
         sign_in_page.get_ya_ru_window_submit_button().click()
         sign_in_page.get_ya_ru_window_password_field().send_keys(credentials['ya.ru_password'])
         sign_in_page.get_ya_ru_window_submit_button().click()
+        sleep(5)
         try:
             sign_in_page.get_ya_ru_window_control_question_field()
             sign_in_page.get_ya_ru_window_control_question_field().send_keys(credentials['ya.ru_question'])
