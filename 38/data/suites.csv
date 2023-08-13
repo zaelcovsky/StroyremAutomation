@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"broken","Sun Aug 13 22:23:56 GMT 2023","Sun Aug 13 22:24:01 GMT 2023","5089","tests.test_sign_in","test_sign_in_page","TestSignInPage","","","Авторизация с помощью аккаунта ya.ru",""
