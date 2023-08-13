@@ -64,6 +64,34 @@ class TestSignInPage:
     def test_positive_authorization_first_time_using_OK_smoke(self, driver, sign_in_page, open_sign_in_window):
         sign_in_page.get_ok_ru_auth_icon().click()
         driver.switch_to.window(driver.window_handles[1])
+        driver.add_cookie({'name': 'bci',
+                           'value': '232693873704985418',
+                           'domain': '.ok.ru',
+                           'httpOnly': True,
+                           'path': '/',
+                           'expiry': 1726518377,
+                           'secure': True})
+        driver.add_cookie({'name': '_statid',
+                           'value': '2ee9fe98-ab2c-4d1f-9c04-30b8090d3f61',
+                           'domain': '.ok.ru',
+                           'httpOnly': True,
+                           'path': '/',
+                           'expiry': 1726518377,
+                           'secure': True})
+        driver.add_cookie({'name': 'landref',
+                           'value': 'stroyrem-nn.ru',
+                           'domain': '.ok.ru',
+                           'httpOnly': False,
+                           'path': '/',
+                           'expiry': 1726518377,
+                           'secure': True})
+        driver.add_cookie({'name': '__last_online',
+                           'value': '1691958637776',
+                           'domain': 'connect.ok.ru',
+                           'httpOnly': False,
+                           'path': '/',
+                           'expiry': 1726518638,
+                           'secure': True})
         sign_in_page.get_ok_ru_window_email_field().send_keys(credentials['ok.ru_email'])
         sign_in_page.get_ok_ru_window_password_field().send_keys(credentials['ok.ru_password'])
         sign_in_page.get_ok_ru_window_submit_button().click()
@@ -118,7 +146,7 @@ class TestSignInPage:
             print(f"\nПоявилось окно контрольного вопроса")
         except (NoSuchWindowException, NoSuchElementException):
             print(f"\nНе появилось окно контрольного вопроса")
-        driver.switch_to.window(driver.window_handles[0])
+        # driver.switch_to.window(driver.window_handles[0])
         sign_in_page.check_number_of_windows_to_be_equal(1)
         sleep(10)
         assert driver.current_url == ACCOUNT_PAGE, f"Неправильный url страницы: {driver.current_url}"
