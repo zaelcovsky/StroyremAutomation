@@ -188,7 +188,7 @@ class SignInPage(SeleniumBase):
 
     @allure.step("Проверка кликабельности элемента: кнопка 'Другие способы входа' окна авторизации через 'ya.ru'")
     def get_ya_ru_window_alternative_ways_to_sign_up(self):
-        return self.element_is_clickable(self._ya_ru_window_alternative_ways_to_sign_up)
+        return self.find_element(self._ya_ru_window_alternative_ways_to_sign_up)
 
     @allure.step("Проверка кликабельности элемента: поле 'Email' окна авторизации через 'ya.ru'")
     def get_ya_ru_window_email_field(self):

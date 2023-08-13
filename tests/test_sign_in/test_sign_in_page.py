@@ -132,6 +132,7 @@ class TestSignInPage:
     def test_positive_authorization_first_time_using_YA_smoke(self, driver, sign_in_page, open_sign_in_window):
         sign_in_page.get_ya_ru_auth_icon().click()
         driver.switch_to.window(driver.window_handles[1])
+        sleep(5)
         driver.execute_script("arguments[0].scrollIntoView();",
                               sign_in_page.get_ya_ru_window_alternative_ways_to_sign_up())
         driver.execute_script("arguments[0].click();", sign_in_page.get_ya_ru_window_alternative_ways_to_sign_up())
