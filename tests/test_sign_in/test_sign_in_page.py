@@ -97,7 +97,7 @@ class TestSignInPage:
         sign_in_page.get_ok_ru_window_submit_button().click()
         # на новых аккаунтах нужно еще кликнуть акцепт
         # self.driver.find_element(*self._ok_ru_window_accept_button).click()
-        # driver.switch_to.window(driver.window_handles[0])
+        driver.switch_to.window(driver.window_handles[0])
         sign_in_page.check_number_of_windows_to_be_equal(1)
         # c OK.ru не подтягивается email, нужно вводить вручную https://trello.com/c/D1M0KnkP
         # self.driver.find_element(*self._ulogin_window_email_field).send_keys(email)
@@ -127,7 +127,7 @@ class TestSignInPage:
             f"ФИО или email не соответствуют ожидаемым, ФИО: {name}, email: {email}"
 
     @allure.title("Авторизация с помощью аккаунта ya.ru")
-    @pytest.mark.xfail
+    # @pytest.mark.xfail
     @pytest.mark.smoke_test
     def test_positive_authorization_first_time_using_YA_smoke(self, driver, sign_in_page, open_sign_in_window):
         sign_in_page.get_ya_ru_auth_icon().click()
