@@ -64,6 +64,8 @@ class SignInPage(SeleniumBase):
         self._ya_ru_window_email_field = (By.CSS_SELECTOR, "input[data-t='field:input-login']")
         self._ya_ru_window_password_field = (By.CSS_SELECTOR, "input[data-t='field:input-passwd']")
         self._ya_ru_window_submit_button = (By.CSS_SELECTOR, "button[id='passp:sign-in']")
+        self._ya_ru_window_control_question_field = (By.CSS_SELECTOR, "input[data-t='field:input-question']")
+        self._ya_ru_window_proceed_button = (By.CSS_SELECTOR, "button[data-t='button:action']")
         self._ya_ru_window_authorize_button = (By.CSS_SELECTOR, "div.Authorize-button")
         # страница восстановления пароля
         self._restore_password_page_heading = (By.CSS_SELECTOR, "h1.reg-h1")
@@ -186,7 +188,7 @@ class SignInPage(SeleniumBase):
 
     @allure.step("Проверка кликабельности элемента: кнопка 'Другие способы входа' окна авторизации через 'ya.ru'")
     def get_ya_ru_window_alternative_ways_to_sign_up(self):
-        return self.element_is_clickable(self._ya_ru_window_alternative_ways_to_sign_up)
+        return self.find_element(self._ya_ru_window_alternative_ways_to_sign_up)
 
     @allure.step("Проверка кликабельности элемента: поле 'Email' окна авторизации через 'ya.ru'")
     def get_ya_ru_window_email_field(self):
@@ -200,31 +202,10 @@ class SignInPage(SeleniumBase):
     def get_ya_ru_window_submit_button(self):
         return self.find_element(self._ya_ru_window_submit_button)
 
+    @allure.step("Нахождение элемента: поле 'Ответ на контрольный вопрос' окна авторизации через 'ya.ru'")
+    def get_ya_ru_window_control_question_field(self):
+        return self.find_element(self._ya_ru_window_control_question_field)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @allure.step("Нахождение элемента: кнопка 'Продолжить' окна авторизации через 'ya.ru'")
+    def get_ya_ru_window_proceed_button(self):
+        return self.find_element(self._ya_ru_window_proceed_button)
