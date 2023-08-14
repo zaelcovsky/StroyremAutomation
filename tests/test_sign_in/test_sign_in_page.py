@@ -132,43 +132,46 @@ class TestSignInPage:
     def test_positive_authorization_first_time_using_YA_smoke(self, driver, sign_in_page, open_sign_in_window):
         sign_in_page.get_ya_ru_auth_icon().click()
         driver.switch_to.window(driver.window_handles[1])
-        driver.add_cookie({'name': 'bh',
-                           'value': 'EkEiTm90L0EpQnJhbmQiO3Y9Ijk5IiwgIkdvb2dsZSBDaHJvbWUiO3Y9IjExNSIsICJDaHJvbWl1bSI7dj0iMTE1IioCPzA6CSJXaW5kb3dzIg',
-                           'domain': '.yandex.ru',
-                           'httpOnly': False,
+        driver.delete_all_cookies()
+        driver.add_cookie({'name': 'uniqueuid',
+                           'value': '384528911692006899',
+                           'domain': 'passport.yandex.ru',
+                           'httpOnly': True,
                            'path': '/',
                            'expiry': 1723499808,
-                           'secure': False})
-        driver.add_cookie({'name': 'ymex',
-                           'value': '2007323807.yrts.1691963807#2007323807.yrtsi.1691963807',
-                           'domain': '.yandex.ru',
-                           'httpOnly': False,
-                           'path': '/',
-                           'expiry': 1723499808,
+                           'sameSite': 'Lax',
                            'secure': True})
-        driver.add_cookie({'name': 'yabs-sid',
-                           'value': '2288521911691963807',
+        # driver.add_cookie({'name': 'uniqueuid',
+        #                    'value': '279217171691968444',
+        #                    'domain': 'passport.yandex.ru',
+        #                    'httpOnly': True,
+        #                    'path': '/',
+        #                    'expiry': 1723499808,
+        #                    'sameSite': 'Lax',
+        #                    'secure': True})
+        driver.add_cookie({'name': 'ymex',
+                           'value': '2007366920.yrts.1692006920#2007366900.yrtsi.1692006900',
                            'domain': '.yandex.ru',
                            'httpOnly': False,
                            'path': '/',
                            'expiry': 1723499808,
                            'secure': True})
         driver.add_cookie({'name': 'i',
-                           'value': 'kKAqyD9GiKMWc9yltp2/Yvh/5CL26dBtoRvp0nCP15Lwx0jr1h3uUXW7mG2mL+YfvK3+YhBaCq/G0sSSwev5FeZ7ZPM=',
+                           'value': 'rpEp6ASpcmkXAketS0UdMiVBT6ovBbPtyYRYZIsRWdkwRjrAU27Q2rmgTx58XJTCF6sreSZhfheTbJeEsS',
                            'domain': '.yandex.ru',
                            'httpOnly': True,
                            'path': '/',
                            'expiry': 1723499808,
                            'secure': True})
         driver.add_cookie({'name': 'yandexuid',
-                           'value': '6677101091691963807',
+                           'value': '5114601221692006901',
                            'domain': '.yandex.ru',
                            'httpOnly': False,
                            'path': '/',
                            'expiry': 1723499808,
                            'secure': True})
         driver.add_cookie({'name': 'yuidss',
-                           'value': '6677101091691963807',
+                           'value': '5114601221692006901',
                            'domain': '.yandex.ru',
                            'httpOnly': False,
                            'path': '/',
@@ -182,14 +185,14 @@ class TestSignInPage:
                            'expiry': 1723499808,
                            'secure': True})
         driver.add_cookie({'name': '_ym_uid',
-                           'value': '1691963808885816030',
+                           'value': '169200690291832112',
                            'domain': '.yandex.ru',
                            'httpOnly': False,
                            'path': '/',
                            'expiry': 1723499808,
                            'secure': True})
         driver.add_cookie({'name': '_ym_d',
-                           'value': '1691963809',
+                           'value': '1692006902',
                            'domain': '.yandex.ru',
                            'httpOnly': False,
                            'path': '/',
@@ -197,11 +200,11 @@ class TestSignInPage:
                            'secure': True})
         driver.add_cookie({'name': 'bh',
                            'value': 'Ej8iTm90L0EpQnJhbmQiO3Y9Ijk5IiwiR29vZ2xlIENocm9tZSI7dj0iMTE1IiwiQ2hyb21pdW0iO3Y9IjExNSIaBSJ4ODYiIhAiMTE1LjAuNTc5MC4xMTAiKgI',
-                           'domain': '.yandex.ru',
+                           'domain': 'yandex.ru',
                            'httpOnly': False,
                            'path': '/',
                            'expiry': 1723499808,
-                           'secure': True})
+                           'secure': False})
         driver.add_cookie({'name': '_ym_visorc',
                            'value': 'b',
                            'domain': '.yandex.ru',
@@ -209,20 +212,20 @@ class TestSignInPage:
                            'path': '/',
                            'expiry': 1723499808,
                            'secure': True})
-        driver.add_cookie({'name': '_yasc',
-                           'value': 'kP/6YlZVXBoK5fzKpjhuyTaBBCtLa5X/RChpctvBzGAjQ5AzfpgQU/QprnDNsA==',
-                           'domain': '.yandex.ru',
-                           'httpOnly': False,
-                           'path': '/',
-                           'expiry': 1723499808,
-                           'secure': True})
-        driver.add_cookie({'name': '_ym_isad',
-                           'value': '2',
-                           'domain': '.yandex.ru',
-                           'httpOnly': False,
-                           'path': '/',
-                           'expiry': 1723499808,
-                           'secure': True})
+        # driver.add_cookie({'name': '_yasc',
+        #                    'value': 'kP/6YlZVXBoK5fzKpjhuyTaBBCtLa5X/RChpctvBzGAjQ5AzfpgQU/QprnDNsA==',
+        #                    'domain': '.yandex.ru',
+        #                    'httpOnly': False,
+        #                    'path': '/',
+        #                    'expiry': 1723499808,
+        #                    'secure': True})
+        # driver.add_cookie({'name': '_ym_isad',
+        #                    'value': '2',
+        #                    'domain': '.yandex.ru',
+        #                    'httpOnly': False,
+        #                    'path': '/',
+        #                    'expiry': 1723499808,
+        #                    'secure': True})
         # driver.maximize_window()
         driver.execute_script("arguments[0].scrollIntoView();",
                               sign_in_page.get_ya_ru_window_alternative_ways_to_sign_up())
