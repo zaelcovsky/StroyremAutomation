@@ -13,9 +13,6 @@ jobs:
       - name: Pass credentials
         run: |
           sudo echo "${{ secrets.STROYREM_CREDENTIALS }}" > data/credentials.py
-          cd data/
-          echo $PWD
-          ls
       - name: docker build
         run: |
           sudo docker build -t stroyrem .
