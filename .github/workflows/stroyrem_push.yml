@@ -10,6 +10,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
+      - name: Pass credentials
+        run: |
+          sudo echo "${{ secrets.STROYREM_CREDENTIALS }}" > data/credentials.py
       - name: docker build
         run: |
           sudo docker build -t stroyrem .
