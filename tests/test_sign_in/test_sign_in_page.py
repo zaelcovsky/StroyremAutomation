@@ -127,7 +127,7 @@ class TestSignInPage:
             f"ФИО или email не соответствуют ожидаемым, ФИО: {name}, email: {email}"
 
     @allure.title("Авторизация с помощью аккаунта ya.ru")
-    # @pytest.mark.xfail
+    @pytest.mark.xfail(reason="Появляется капча Яндекса при запуске теста на Github")
     @pytest.mark.smoke_test
     def test_positive_authorization_first_time_using_YA_smoke(self, driver, sign_in_page, open_sign_in_window):
         sign_in_page.get_ya_ru_auth_icon().click()
@@ -141,14 +141,6 @@ class TestSignInPage:
                            'expiry': 1723499808,
                            'sameSite': 'Lax',
                            'secure': True})
-        # driver.add_cookie({'name': 'uniqueuid',
-        #                    'value': '279217171691968444',
-        #                    'domain': 'passport.yandex.ru',
-        #                    'httpOnly': True,
-        #                    'path': '/',
-        #                    'expiry': 1723499808,
-        #                    'sameSite': 'Lax',
-        #                    'secure': True})
         driver.add_cookie({'name': 'ymex',
                            'value': '2007366920.yrts.1692006920#2007366900.yrtsi.1692006900',
                            'domain': '.yandex.ru',
@@ -212,25 +204,8 @@ class TestSignInPage:
                            'path': '/',
                            'expiry': 1723499808,
                            'secure': True})
-        # driver.add_cookie({'name': '_yasc',
-        #                    'value': 'kP/6YlZVXBoK5fzKpjhuyTaBBCtLa5X/RChpctvBzGAjQ5AzfpgQU/QprnDNsA==',
-        #                    'domain': '.yandex.ru',
-        #                    'httpOnly': False,
-        #                    'path': '/',
-        #                    'expiry': 1723499808,
-        #                    'secure': True})
-        # driver.add_cookie({'name': '_ym_isad',
-        #                    'value': '2',
-        #                    'domain': '.yandex.ru',
-        #                    'httpOnly': False,
-        #                    'path': '/',
-        #                    'expiry': 1723499808,
-        #                    'secure': True})
-        # driver.maximize_window()
-        sleep(5)
         driver.execute_script("arguments[0].scrollIntoView();",
                               sign_in_page.get_ya_ru_window_alternative_ways_to_sign_up())
-        sleep(5)
         driver.execute_script("arguments[0].click();", sign_in_page.get_ya_ru_window_alternative_ways_to_sign_up())
         sign_in_page.get_ya_ru_window_email_field().send_keys(credentials['ya.ru_email'])
         sign_in_page.get_ya_ru_window_submit_button().click()
