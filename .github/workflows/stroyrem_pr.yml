@@ -23,6 +23,3 @@ jobs:
       - name: docker run
         run: |
           sudo docker run --rm stroyrem pytest -s -v tests/
-
-
-      
