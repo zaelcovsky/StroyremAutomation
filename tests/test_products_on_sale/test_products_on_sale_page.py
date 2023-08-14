@@ -106,3 +106,28 @@ class TestProductsOnSalePage:
         assert total == price - round(price * 0.015, 2), (f"ОР: Стоимость товара = {price - round(price * 0.015, 2)}, "
                                                           f"ФР: стоимость товара = {total}")
         assert discount == round(price * 0.015, 2), f"ОР: Скидка = {round(price * 0.015, 2)}, ФР: скидка = {discount}"
+
+    @allure.title("positive_check_discount_displayed_for_unauthorized_customer_for_amount_50_3499rub_smoke")
+    @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{KISTI_MALYARNYE_PAGE_URL}",
+                                      f"{MAIN_PAGE_STAGE_URL}{KISTI_MALYARNYE_PAGE_URL}"])
+    @pytest.mark.smoke_test
+    def test_positive_check_discount_for_unauthorized_customer_for_amount_50_3499rub_smoke(self, driver, link):
+        page = ProductsOnSale(driver)
+        driver.get(link)
+        page.get_field_price_first().send_keys(50)
+        page.get_field_price_last().send_keys(3499)
+        page.get_in_stock_products_link().click()
+        time.sleep(1)
+        price = (float(page.get_pc_price().text[:-2].replace(' ', '')))
+        page.get_add_to_cart_btn().click()
+        page.get_header_cart_link_active().click()
+        page.get_show_modal().click()
+        page.get_name().send_keys(USER_NAME)
+        page.get_phone().send_keys(USER_PHONE)
+        page.get_email().send_keys(USER_EMAIL)
+        page.get_checkout_to_step_2().click()
+        total = (float(page.get_products_total().text[:-2].replace(' ', '')))
+        discount = (float(page.get_discount_price().text[:-2].replace(' ', '')))
+        assert total == price - round(price * 0.01, 2), (f"ОР: Стоимость товара = {price - round(price * 0.01, 2)}, "
+                                                          f"ФР: стоимость товара = {total}")
+        assert discount == round(price * 0.01, 2), f"ОР: Скидка = {round(price * 0.01, 2)}, ФР: скидка = {discount}"
