@@ -237,3 +237,4 @@ class TestSignInPage:
         name, email = get_name_and_email_in_account(driver, sign_in_page)
         assert name == credentials['name'] and email == credentials['email'], \
             f"ФИО или email не соответствуют ожидаемым, ФИО: {name}, email: {email}"
+
