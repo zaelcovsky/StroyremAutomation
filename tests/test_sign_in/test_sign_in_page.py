@@ -227,8 +227,10 @@ class TestSignInPage:
         #                    'expiry': 1723499808,
         #                    'secure': True})
         # driver.maximize_window()
+        sleep(5)
         driver.execute_script("arguments[0].scrollIntoView();",
                               sign_in_page.get_ya_ru_window_alternative_ways_to_sign_up())
+        sleep(5)
         driver.execute_script("arguments[0].click();", sign_in_page.get_ya_ru_window_alternative_ways_to_sign_up())
         sign_in_page.get_ya_ru_window_email_field().send_keys(credentials['ya.ru_email'])
         sign_in_page.get_ya_ru_window_submit_button().click()
@@ -242,7 +244,7 @@ class TestSignInPage:
             print(f"\nПоявилось окно контрольного вопроса")
         except (NoSuchWindowException, NoSuchElementException):
             print(f"\nНе появилось окно контрольного вопроса")
-        # driver.switch_to.window(driver.window_handles[0])
+        driver.switch_to.window(driver.window_handles[0])
         sign_in_page.check_number_of_windows_to_be_equal(1)
         sleep(10)
         assert driver.current_url == ACCOUNT_PAGE, f"Неправильный url страницы: {driver.current_url}"
