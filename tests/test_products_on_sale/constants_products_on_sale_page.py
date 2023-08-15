@@ -4,6 +4,8 @@ SHTUKATURNO_OTDELOCHNYJ_INSTRUMENT_PAGE_URL = "catalog/shtukaturno-otdelochnyj-i
 RASTVORONASOSY_PAGE_URL = "catalog/rastvoronasosy"
 SHLIFOVALNYE_MASHINY_PAGE_URL = "catalog/shlifovalnye-mashiny"
 KISTI_MALYARNYE_PAGE_URL = "catalog/kisti-malyarnye"
+RASTVORNYE_PISTOLETY_SOPLA_PAGE_URL = "catalog/rastvornye-pistolety-sopla"
+ELECTROINSTRUMENT_PAGE_URL = "catalog/elektroinstrument"
 
 USER_NAME = 'Тест'
 USER_PHONE = 9999999999
