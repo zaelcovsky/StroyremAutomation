@@ -43,13 +43,13 @@ class ProductsOnSale(SeleniumBase):
 
     @allure.step("Проверяем видимость кнопки 'В корзину'")
     def get_add_to_cart_btn(self):
-        self.is_element_present(self._add_to_cart_btn)
-        return self.element_is_visible(self._add_to_cart_btn)
+        # self.element_is_visible(self._add_to_cart_btn)
+        return self.element_is_clickable(self._add_to_cart_btn)
 
     @allure.step("Проверяем видимость кнопки 'Корзина'")
     def get_header_cart_link_active(self):
-        self.is_element_present(self._header_cart_link_active)
-        return self.element_is_visible(self._header_cart_link_active)
+        # self.is_element_present(self._header_cart_link_active)
+        return self.element_is_clickable(self._header_cart_link_active)
 
     @allure.step("Проверяем видимость кнопки 'Перейти к оформлению'")
     def get_show_modal(self):
