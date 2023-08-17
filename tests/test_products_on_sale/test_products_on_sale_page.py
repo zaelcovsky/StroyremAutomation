@@ -16,7 +16,6 @@ class TestProductsOnSalePage:
                                                                                         product_page_open):
         product_page_open.get_field_price_first().send_keys(0)
         product_page_open.get_field_price_last().send_keys(49)
-        time.sleep(1)
         product_page_open.get_in_stock_products_link().click()
         time.sleep(2)
         product_page_open.get_add_to_cart_btn().click()
@@ -39,7 +38,6 @@ class TestProductsOnSalePage:
                                                                                                product_page_open):
         product_page_open.get_field_price_first().send_keys(10000)
         product_page_open.get_field_price_last().send_keys(14999)
-        time.sleep(1)
         product_page_open.get_in_stock_products_link().click()
         time.sleep(2)
         product_page_open.get_add_to_cart_btn().click()
@@ -88,9 +86,8 @@ class TestProductsOnSalePage:
                                                                                              product_page_open):
         product_page_open.get_field_price_first().send_keys(3500)
         product_page_open.get_field_price_last().send_keys(4999)
-        time.sleep(1)
         product_page_open.get_in_stock_products_link().click()
-        time.sleep(3)
+        time.sleep(2)
         product_page_open.get_add_to_cart_btn().click()
         price = (float(product_page_open.get_pc_price().text[:-2].replace(' ', '')))
         product_page_open.get_header_cart_link_active().click()
@@ -113,7 +110,6 @@ class TestProductsOnSalePage:
                                                                                            product_page_open):
         product_page_open.get_field_price_first().send_keys(50)
         product_page_open.get_field_price_last().send_keys(3499)
-        time.sleep(1)
         product_page_open.get_in_stock_products_link().click()
         time.sleep(2)
         product_page_open.get_add_to_cart_btn().click()
@@ -139,7 +135,6 @@ class TestProductsOnSalePage:
                                                                                              product_page_open):
         product_page_open.get_field_price_first().send_keys(5000)
         product_page_open.get_field_price_last().send_keys(7499)
-        time.sleep(1)
         product_page_open.get_in_stock_products_link().click()
         time.sleep(2)
         product_page_open.get_add_to_cart_btn().click()
@@ -164,7 +159,6 @@ class TestProductsOnSalePage:
                                                                                              product_page_open):
         product_page_open.get_field_price_first().send_keys(7500)
         product_page_open.get_field_price_last().send_keys(9999)
-        time.sleep(1)
         product_page_open.get_in_stock_products_link().click()
         time.sleep(2)
         product_page_open.get_add_to_cart_btn().click()
