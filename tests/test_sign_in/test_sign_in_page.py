@@ -238,3 +238,5 @@ class TestSignInPage:
         assert name == credentials['name'] and email == credentials['email'], \
             f"ФИО или email не соответствуют ожидаемым, ФИО: {name}, email: {email}"
 
+
+
