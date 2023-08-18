@@ -4,13 +4,13 @@ import allure
 
 
 class ProductsOnSale(SeleniumBase):
-    # в __init__ храним название локатора и его значение для необходимой страницы
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
         self._price_first = (By.NAME, "price_first")
         self._price_last = (By.NAME, "price_last")
         self._in_stock_products = (By.CSS_SELECTOR, "[for='in_stock_products'] span")
+        self._reset_filter = (By.CLASS_NAME, "reset-filter")
         self._pc_price = (By.XPATH, "(//div[contains(text(), 'p')])[1]")
         self._add_to_cart_btn = (By.XPATH, "(//a[contains(@class, 'add-to-cart')])[1]")
         self._header_cart_link_active = (By.CSS_SELECTOR, "a.header-cart-link.active")
@@ -31,29 +31,34 @@ class ProductsOnSale(SeleniumBase):
     def get_field_price_last(self):
         return self.element_is_visible(self._price_last)
 
-    @allure.step("Проверяем видимость кнопки 'На складе'")
+    @allure.step("Проверяем кликабельность кнопки 'На складе'")
     def get_in_stock_products_link(self):
-        self.is_element_present(self._in_stock_products)
-        return self.element_is_visible(self._in_stock_products)
+        self.element_is_visible(self._in_stock_products)
+        return self.element_is_clickable(self._in_stock_products)
+
+    @allure.step("Проверяем видимость кнопки 'Сбросить фильтр'")
+    def get_reset_filter_link(self):
+        return self.element_is_visible(self._reset_filter)
 
     @allure.step("Проверяем видимость цены товара")
     def get_pc_price(self):
         self.is_element_present(self._pc_price)
         return self.element_is_visible(self._pc_price)
 
-    @allure.step("Проверяем видимость кнопки 'В корзину'")
+    @allure.step("Проверяем кликабельность кнопки 'В корзину'")
     def get_add_to_cart_btn(self):
-        # self.element_is_visible(self._add_to_cart_btn)
+        self.element_is_visible(self._add_to_cart_btn)
         return self.element_is_clickable(self._add_to_cart_btn)
 
-    @allure.step("Проверяем видимость кнопки 'Корзина'")
+    @allure.step("Проверяем кликабельность кнопки 'Корзина'")
     def get_header_cart_link_active(self):
-        # self.is_element_present(self._header_cart_link_active)
+        self.is_element_present(self._header_cart_link_active)
         return self.element_is_clickable(self._header_cart_link_active)
 
-    @allure.step("Проверяем видимость кнопки 'Перейти к оформлению'")
+    @allure.step("Проверяем кликабельность кнопки 'Перейти к оформлению'")
     def get_show_modal(self):
-        return self.element_is_visible(self._show_modal)
+        self.element_is_visible(self._show_modal)
+        return self.element_is_clickable(self._show_modal)
 
     @allure.step("Проверяем видимость поля 'ФИО'")
     def get_name(self):
@@ -86,4 +91,3 @@ class ProductsOnSale(SeleniumBase):
     @allure.step("Проверяем видимость значения поля 'Скидка'")
     def get_discount_price(self):
         return self.element_is_visible(self._discount_price)
-
