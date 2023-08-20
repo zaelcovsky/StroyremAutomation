@@ -2,7 +2,6 @@ import time
 import pytest
 import allure
 from selenium.common import ElementClickInterceptedException, StaleElementReferenceException, TimeoutException
-
 from tests.test_products_on_sale.constants_products_on_sale_page import *
 from constants import MAIN_PAGE_STAGE_URL, MAIN_PAGE_PROD_URL
 
