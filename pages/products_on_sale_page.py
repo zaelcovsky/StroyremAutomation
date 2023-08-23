@@ -22,6 +22,7 @@ class ProductsOnSale(SeleniumBase):
         self._products_total = (By.CSS_SELECTOR, "#delivery-service .modal-products-total")
         self._products_sale = (By.XPATH, "//span[text()='Скидка']")
         self._discount_price = (By.CSS_SELECTOR, "#delivery-service .modal-discount-price")
+        self._text_red_link = (By.CLASS_NAME, "text-red")
 
     @allure.step("Проверяем видимость поля 'ЦЕНА от'")
     def get_field_price_first(self):
@@ -35,6 +36,11 @@ class ProductsOnSale(SeleniumBase):
     def get_in_stock_products_link(self):
         self.element_is_visible(self._in_stock_products)
         return self.element_is_clickable(self._in_stock_products)
+
+    @allure.step("Проверяем кликабельность кнопки 'Красная цена!'")
+    def get_text_red_link(self):
+        self.element_is_visible(self._text_red_link)
+        return self.element_is_clickable(self._text_red_link)
 
     @allure.step("Проверяем видимость кнопки 'Сбросить фильтр'")
     def get_reset_filter_link(self):

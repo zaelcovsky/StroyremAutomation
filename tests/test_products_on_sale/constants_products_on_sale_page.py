@@ -6,6 +6,7 @@ SHLIFOVALNYE_MASHINY_PAGE_URL = "catalog/shlifovalnye-mashiny"
 KISTI_MALYARNYE_PAGE_URL = "catalog/kisti-malyarnye"
 RASTVORNYE_PISTOLETY_SOPLA_PAGE_URL = "catalog/rastvornye-pistolety-sopla"
 ELECTROINSTRUMENT_PAGE_URL = "catalog/elektroinstrument"
+ACTION_PAGE_URL = "catalog/action"
 
 USER_NAME = 'Тест'
 USER_PHONE = 9999999999
