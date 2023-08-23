@@ -37,7 +37,7 @@ class TestProductsOnSalePage:
     @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{SHTUKATURNO_OTDELOCHNYJ_INSTRUMENT_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{SHTUKATURNO_OTDELOCHNYJ_INSTRUMENT_PAGE_URL}"])
     @pytest.mark.smoke_test
-    def test_positive_check_discount_for_unauthorized_customer_for_amount_10000_14999rub_smoke(self, driver, link,
+    def test_positive_check_discount_for_unauthorized_customer_for_amount_10000_14999rub_smoke(self, link,
                                                                                                product_page_open):
         try:
             product_page_open.get_field_price_first().send_keys(10000)
@@ -63,9 +63,9 @@ class TestProductsOnSalePage:
     @allure.title("positive_check_discount_displayed_for_unauthorized_customer_for_amount_15000rub_and_above_smoke")
     @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{RASTVORONASOSY_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{RASTVORONASOSY_PAGE_URL}"])
-    @pytest.mark.xfail(strict=True)  # Ждем исправление бага - Разная цена товара в каталоге и на карточке товара
+    @pytest.mark.xfail(reason="Ждем исправление бага - Разная цена товара в каталоге и на карточке товара")
     @pytest.mark.smoke_test
-    def test_positive_check_discount_for_unauthorized_customer_for_amount_15000rub_and_above_smoke(self, driver, link,
+    def test_positive_check_discount_for_unauthorized_customer_for_amount_15000rub_and_above_smoke(self, link,
                                                                                                    product_page_open):
         try:
             product_page_open.get_field_price_first().send_keys(15000)
@@ -91,7 +91,7 @@ class TestProductsOnSalePage:
     @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{SHLIFOVALNYE_MASHINY_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{SHLIFOVALNYE_MASHINY_PAGE_URL}"])
     @pytest.mark.smoke_test
-    def test_positive_check_discount_for_unauthorized_customer_for_amount_3500_4999rub_smoke(self, driver, link,
+    def test_positive_check_discount_for_unauthorized_customer_for_amount_3500_4999rub_smoke(self, link,
                                                                                              product_page_open):
         try:
             product_page_open.get_field_price_first().send_keys(3500)
@@ -119,7 +119,7 @@ class TestProductsOnSalePage:
     @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{KISTI_MALYARNYE_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{KISTI_MALYARNYE_PAGE_URL}"])
     @pytest.mark.smoke_test
-    def test_positive_check_discount_for_unauthorized_customer_for_amount_50_3499rub_smoke(self, driver, link,
+    def test_positive_check_discount_for_unauthorized_customer_for_amount_50_3499rub_smoke(self, link,
                                                                                            product_page_open):
         try:
             product_page_open.get_field_price_first().send_keys(50)
@@ -145,9 +145,9 @@ class TestProductsOnSalePage:
     @allure.title("positive_check_discount_displayed_for_unauthorized_customer_for_amount_5000_7499rub_smoke")
     @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{RASTVORNYE_PISTOLETY_SOPLA_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{RASTVORNYE_PISTOLETY_SOPLA_PAGE_URL}"])
-    @pytest.mark.xfail(strict=True)  # Ждем уточнение о способе округления скидки и стоимости товара
+    @pytest.mark.xfail(reason="Ждем уточнение о способе округления скидки и стоимости товара")
     @pytest.mark.smoke_test
-    def test_positive_check_discount_for_unauthorized_customer_for_amount_5000_7499rub_smoke(self, driver, link,
+    def test_positive_check_discount_for_unauthorized_customer_for_amount_5000_7499rub_smoke(self, link,
                                                                                              product_page_open):
         try:
             product_page_open.get_field_price_first().send_keys(5000)
@@ -175,7 +175,7 @@ class TestProductsOnSalePage:
     @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{ELECTROINSTRUMENT_PAGE_URL}",
                                       f"{MAIN_PAGE_STAGE_URL}{ELECTROINSTRUMENT_PAGE_URL}"])
     @pytest.mark.smoke_test
-    def test_positive_check_discount_for_unauthorized_customer_for_amount_7500_9999rub_smoke(self, driver, link,
+    def test_positive_check_discount_for_unauthorized_customer_for_amount_7500_9999rub_smoke(self, link,
                                                                                              product_page_open):
         try:
             product_page_open.get_field_price_first().send_keys(7500)
@@ -222,3 +222,22 @@ class TestProductsOnSalePage:
             assert product_page_open.cant_get_field_sale(), "Есть поле 'Скидка'"
         except (ElementClickInterceptedException, StaleElementReferenceException, TimeoutException):
             print(f"\nЭлемент не прогрузился или кнопка не кликабельна")
+
+    @allure.title("positive_discount_for_unauthorized_customer_purchase_amount_0_to_49rub_smoke")
+    @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{SHURUPY_PO_DEREVU_PAGE_URL}",
+                                      f"{MAIN_PAGE_STAGE_URL}{SHURUPY_PO_DEREVU_PAGE_URL}"])
+    @pytest.mark.smoke_test
+    def test_positive_discount_for_unauthorized_customer_purchase_amount_0_to_49rub_smoke(
+            self, link, product_page_open):
+        product_page_open.get_field_price_first().send_keys(0)
+        product_page_open.get_field_price_last().send_keys(49)
+        product_page_open.get_in_stock_products_link().click()
+        time.sleep(5)
+        price = (float(product_page_open.get_pc_price().text[:-2]))
+        product_page_open.get_add_to_cart_btn().click()
+        product_page_open.get_header_cart_link_active().click()
+        total = (float(product_page_open.get_total_current_price().text[:-2]))
+        cart_total = (float(product_page_open.get_cart_total().text[:-2]))
+        assert price == total == cart_total, \
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+        assert int(product_page_open.get_cart_discount().text[:-2]) == 0, "Есть Скидка за объём"

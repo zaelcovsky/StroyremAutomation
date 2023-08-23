@@ -23,6 +23,9 @@ class ProductsOnSale(SeleniumBase):
         self._products_sale = (By.XPATH, "//span[text()='Скидка']")
         self._discount_price = (By.CSS_SELECTOR, "#delivery-service .modal-discount-price")
         self._text_red_link = (By.CLASS_NAME, "text-red")
+        self._cart_total = (By.ID, "cart-total")
+        self._cart_discount = (By.CSS_SELECTOR, ".strong div")
+        self._total_current_price = (By.CSS_SELECTOR, ".cell-total .cell-value")
 
     @allure.step("Проверяем видимость поля 'ЦЕНА от'")
     def get_field_price_first(self):
@@ -97,3 +100,15 @@ class ProductsOnSale(SeleniumBase):
     @allure.step("Проверяем видимость значения поля 'Скидка'")
     def get_discount_price(self):
         return self.element_is_visible(self._discount_price)
+
+    @allure.step("Проверяем видимость значения поля 'Товары на сумму'")
+    def get_cart_total(self):
+        return self.element_is_present(self._cart_total)
+
+    @allure.step("Проверяем видимость суммы Товара в корзине ")
+    def get_total_current_price(self):
+        return self.element_is_present(self._total_current_price)
+
+    @allure.step("Проверяем видимость значения поля 'Скидка за объём'")
+    def get_cart_discount(self):
+        return self.element_is_present(self._cart_discount)
