@@ -289,3 +289,4 @@ class TestProductsOnSalePage:
             f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
         assert discount == round(price * 0.04, 2), \
             f"ОР: Скидка за объем = {round(price * 0.04, 2)}, ФР: скидка = {discount}"
+
