@@ -17,6 +17,7 @@ class TestProductsOnSalePage:
         try:
             product_page_open.get_field_price_first().send_keys(0)
             product_page_open.get_field_price_last().send_keys(49)
+            time.sleep(1)
             product_page_open.get_in_stock_products_link().click()
             time.sleep(5)
             price = (float(product_page_open.get_pc_price().text[:-2]))
@@ -42,6 +43,7 @@ class TestProductsOnSalePage:
         try:
             product_page_open.get_field_price_first().send_keys(10000)
             product_page_open.get_field_price_last().send_keys(14999)
+            time.sleep(1)
             product_page_open.get_in_stock_products_link().click()
             time.sleep(5)
             product_page_open.get_add_to_cart_btn().click()
@@ -96,6 +98,7 @@ class TestProductsOnSalePage:
         try:
             product_page_open.get_field_price_first().send_keys(3500)
             product_page_open.get_field_price_last().send_keys(4999)
+            time.sleep(1)
             product_page_open.get_in_stock_products_link().click()
             time.sleep(5)
             product_page_open.get_add_to_cart_btn().click()
@@ -124,6 +127,7 @@ class TestProductsOnSalePage:
         try:
             product_page_open.get_field_price_first().send_keys(50)
             product_page_open.get_field_price_last().send_keys(3499)
+            time.sleep(1)
             product_page_open.get_in_stock_products_link().click()
             time.sleep(5)
             product_page_open.get_add_to_cart_btn().click()
@@ -152,6 +156,7 @@ class TestProductsOnSalePage:
         try:
             product_page_open.get_field_price_first().send_keys(5000)
             product_page_open.get_field_price_last().send_keys(7499)
+            time.sleep(1)
             product_page_open.get_in_stock_products_link().click()
             time.sleep(5)
             product_page_open.get_add_to_cart_btn().click()
@@ -180,6 +185,7 @@ class TestProductsOnSalePage:
         try:
             product_page_open.get_field_price_first().send_keys(7500)
             product_page_open.get_field_price_last().send_keys(9999)
+            time.sleep(1)
             product_page_open.get_in_stock_products_link().click()
             time.sleep(5)
             product_page_open.get_add_to_cart_btn().click()
@@ -231,6 +237,7 @@ class TestProductsOnSalePage:
             self, link, product_page_open):
         product_page_open.get_field_price_first().send_keys(0)
         product_page_open.get_field_price_last().send_keys(49)
+        time.sleep(1)
         product_page_open.get_in_stock_products_link().click()
         time.sleep(5)
         price = (float(product_page_open.get_pc_price().text[:-2]))
@@ -241,3 +248,44 @@ class TestProductsOnSalePage:
         assert price == total == cart_total, \
             f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
         assert int(product_page_open.get_cart_discount().text[:-2]) == 0, "Есть Скидка за объём"
+
+    @allure.title("positive_check_there_is_no_discount_for_unauthorized_customer_red_prices_smoke")
+    @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{ACTION_PAGE_URL}",
+                                      f"{MAIN_PAGE_STAGE_URL}{ACTION_PAGE_URL}"])
+    @pytest.mark.smoke_test
+    def test_positive_check_there_is_no_discount_for_unauthorized_customer_red_prices_smoke(
+            self, link, product_page_open):
+        product_page_open.get_in_stock_products_link().click()
+        time.sleep(2)
+        product_page_open.get_text_red_link().click()
+        time.sleep(2)
+        product_page_open.get_add_to_cart_btn().click()
+        price = (float(product_page_open.get_pc_price().text[:-2].replace(' ', '')))
+        product_page_open.get_header_cart_link_active().click()
+        total = (float(product_page_open.get_total_current_price().text[:-2].replace(' ', '')))
+        cart_total = (float(product_page_open.get_cart_total().text[:-2].replace(' ', '')))
+        assert price == total == cart_total, \
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+        assert int(product_page_open.get_cart_discount().text[:-2]) == 0, "Есть Скидка за объём"
+
+    @allure.title("positive_discount_for_unauthorized_customer_purchase_amount_10000_to_14999rub_smoke")
+    @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{SHTUKATURNO_OTDELOCHNYJ_INSTRUMENT_PAGE_URL}",
+                                      f"{MAIN_PAGE_STAGE_URL}{SHTUKATURNO_OTDELOCHNYJ_INSTRUMENT_PAGE_URL}"])
+    @pytest.mark.smoke_test
+    def test_positive_discount_for_unauthorized_customer_purchase_amount_10000_to_14999rub_smoke(
+            self, link, product_page_open):
+        product_page_open.get_field_price_first().send_keys(10000)
+        product_page_open.get_field_price_last().send_keys(14999)
+        time.sleep(1)
+        product_page_open.get_in_stock_products_link().click()
+        time.sleep(5)
+        price = (float(product_page_open.get_pc_price().text[:-2].replace(' ', '')))
+        product_page_open.get_add_to_cart_btn().click()
+        product_page_open.get_header_cart_link_active().click()
+        total = (float(product_page_open.get_total_current_price().text[:-2].replace(' ', '')))
+        cart_total = (float(product_page_open.get_cart_total().text[:-2].replace(' ', '')))
+        discount = float(product_page_open.get_cart_discount().text[:-2].replace(' ', ''))
+        assert total == price - round(price * 0.04, 2) == cart_total, \
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+        assert discount == round(price * 0.04, 2), \
+            f"ОР: Скидка за объем = {round(price * 0.04, 2)}, ФР: скидка = {discount}"
