@@ -59,13 +59,13 @@ class TestMainPage:
             articles = main_page.check_page_content()
             assert articles, "Articles are not present on the page"
 
-    # @allure.feature("Footer functionality")
-    # @allure.title("TC 006 - Проверка функциональности ссылки 'Обратный звонок'")
-    # @pytest.mark.xfail(reason="Сломалось?")
-    # @pytest.mark.smoke_test
-    # def test_positive_footer_back_call_smoke(self, main_page):
-    #     result = main_page.check_call_back_link()
-    #     assert result == "Заказать обратный звонок", f"Ожидалось 'Заказать обратный звонок', но получено '{result}'"
+    @allure.feature("Footer functionality")
+    @allure.title("TC 006 - Проверка функциональности ссылки 'Обратный звонок'")
+    @pytest.mark.xfail(reason="Сломалось?")
+    @pytest.mark.smoke_test
+    def test_positive_footer_back_call_smoke(self, main_page):
+        result = main_page.check_call_back_link()
+        assert result == "Заказать обратный звонок", f"Ожидалось 'Заказать обратный звонок', но получено '{result}'"
 
     @allure.feature("Footer functionality")
     @allure.title("TC 007 - Проверка функциональности ссылки 'Строительные советы'")
