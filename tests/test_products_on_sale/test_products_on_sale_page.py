@@ -310,3 +310,26 @@ class TestProductsOnSalePage:
             f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
         assert discount == round(price * 0.05, 2), \
             f"ОР: Скидка за объем = {round(price * 0.05, 2)}, ФР: скидка = {discount}"
+
+    @allure.title("positive_discount_for_unauthorized_customer_purchase_amount_3500_to_4999rub_smoke")
+    @pytest.mark.parametrize('link', [f"{MAIN_PAGE_PROD_URL}{SHLIFOVALNYE_MASHINY_PAGE_URL}",
+                                      f"{MAIN_PAGE_STAGE_URL}{SHLIFOVALNYE_MASHINY_PAGE_URL}"])
+    @pytest.mark.smoke_test
+    def test_positive_discount_for_unauthorized_customer_purchase_amount_3500_to_4999rub_smoke(
+            self, link, product_page_open):
+        product_page_open.get_field_price_first().send_keys(3500)
+        product_page_open.get_field_price_last().send_keys(4999)
+        time.sleep(1)
+        product_page_open.get_in_stock_products_link().click()
+        time.sleep(5)
+        price = (float(product_page_open.get_pc_price().text[:-2].replace(' ', '')))
+        product_page_open.get_add_to_cart_btn().click()
+        product_page_open.get_header_cart_link_active().click()
+        total = (float(product_page_open.get_total_current_price().text[:-2].replace(' ', '')))
+        cart_total = (float(product_page_open.get_cart_total().text[:-2].replace(' ', '')))
+        discount = float(product_page_open.get_cart_discount().text[:-2].replace(' ', ''))
+        assert total == price - round(price * 0.015, 2) == cart_total, \
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+        assert discount == round(price * 0.015, 2), \
+            f"ОР: Скидка за объем = {round(price * 0.015, 2)}, ФР: скидка = {discount}"
+
