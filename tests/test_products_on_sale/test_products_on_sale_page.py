@@ -265,7 +265,7 @@ class TestProductsOnSalePage:
         total = (float(product_page_open.get_total_current_price().text[:-2].replace(' ', '')))
         cart_total = (float(product_page_open.get_cart_total().text[:-2].replace(' ', '')))
         assert price == total == cart_total, \
-            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total} и со скидкой:{total}"
         assert int(product_page_open.get_cart_discount().text[:-2]) == 0, "Есть Скидка за объём"
 
     @allure.title("positive_discount_for_unauthorized_customer_purchase_amount_10000_to_14999rub_smoke")
@@ -286,7 +286,7 @@ class TestProductsOnSalePage:
         cart_total = (float(product_page_open.get_cart_total().text[:-2].replace(' ', '')))
         discount = float(product_page_open.get_cart_discount().text[:-2].replace(' ', ''))
         assert total == price - round(price * 0.04, 2) == cart_total, \
-            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total} и со скидкой:{total}"
         assert discount == round(price * 0.04, 2), \
             f"ОР: Скидка за объем = {round(price * 0.04, 2)}, ФР: скидка = {discount}"
 
@@ -307,7 +307,7 @@ class TestProductsOnSalePage:
         cart_total = (float(product_page_open.get_cart_total().text[:-2].replace(' ', '')))
         discount = float(product_page_open.get_cart_discount().text[:-2].replace(' ', ''))
         assert total == price - round(price * 0.05, 2) == cart_total, \
-            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total} и со скидкой:{total}"
         assert discount == round(price * 0.05, 2), \
             f"ОР: Скидка за объем = {round(price * 0.05, 2)}, ФР: скидка = {discount}"
 
@@ -329,7 +329,7 @@ class TestProductsOnSalePage:
         cart_total = (float(product_page_open.get_cart_total().text[:-2].replace(' ', '')))
         discount = float(product_page_open.get_cart_discount().text[:-2].replace(' ', ''))
         assert total == price - round(price * 0.015, 2) == cart_total, \
-            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total} и со скидкой:{total}"
         assert discount == round(price * 0.015, 2), \
             f"ОР: Скидка за объем = {round(price * 0.015, 2)}, ФР: скидка = {discount}"
 
@@ -352,7 +352,7 @@ class TestProductsOnSalePage:
         cart_total = (float(product_page_open.get_cart_total().text[:-2].replace(' ', '')))
         discount = float(product_page_open.get_cart_discount().text[:-2].replace(' ', ''))
         assert total == price - round(price * 0.025, 2) == cart_total, \
-            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total} и со скидкой:{total}"
         assert discount == round(price * 0.025, 2), \
             f"ОР: Скидка за объем = {round(price * 0.025, 2)}, ФР: скидка = {discount}"
 
@@ -374,7 +374,7 @@ class TestProductsOnSalePage:
         cart_total = (float(product_page_open.get_cart_total().text[:-2].replace(' ', '')))
         discount = float(product_page_open.get_cart_discount().text[:-2].replace(' ', ''))
         assert total == price - round(price * 0.01, 2) == cart_total, \
-            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total} и со скидкой:{total}"
         assert discount == round(price * 0.01, 2), \
             f"ОР: Скидка за объем = {round(price * 0.01, 2)}, ФР: скидка = {discount}"
 
@@ -396,6 +396,6 @@ class TestProductsOnSalePage:
         cart_total = (float(product_page_open.get_cart_total().text[:-2].replace(' ', '')))
         discount = float(product_page_open.get_cart_discount().text[:-2].replace(' ', ''))
         assert total == price - round(price * 0.03, 2) == cart_total, \
-            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total}"
+            f"ОР: Суммы равны, ФР: Cтоимость товара в каталоге: {price} в корзине: {cart_total} и со скидкой:{total}"
         assert discount == round(price * 0.03, 2), \
             f"ОР: Скидка за объем = {round(price * 0.03, 2)}, ФР: скидка = {discount}"
