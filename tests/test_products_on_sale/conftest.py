@@ -10,4 +10,3 @@ def product_page_open(driver, link):
     page = ProductsOnSale(driver)
     driver.get(link)
     return page
-

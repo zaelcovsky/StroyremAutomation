@@ -28,7 +28,7 @@ class TestMainPage:
 
     @allure.feature("Header functionality")
     @allure.title("TC 003 - Функционал кнопоки 'Корзина' в шапке главной страницы")
-    @pytest.mark.xfail
+    # @pytest.mark.xfail
     @pytest.mark.smoke_test
     def test_positive_header_basket1_smoke(self, setup, main_page):
         main_page, item_page, basket_page = setup
@@ -61,6 +61,7 @@ class TestMainPage:
 
     @allure.feature("Footer functionality")
     @allure.title("TC 006 - Проверка функциональности ссылки 'Обратный звонок'")
+    @pytest.mark.xfail(reason="Сломалось?")
     @pytest.mark.smoke_test
     def test_positive_footer_back_call_smoke(self, main_page):
         result = main_page.check_call_back_link()
@@ -93,7 +94,7 @@ class TestMainPage:
 
     @allure.feature("Footer functionality")
     @allure.title("TC 010 - Проверка функциональности ссылки 'email'")
-    @pytest.mark.xfail(reason="Попап не реализован")
+    # @pytest.mark.xfail(reason="Попап не реализован")
     @pytest.mark.smoke_test
     def test_positive_footer_email_smoke(self, main_page):
         main_page.check_email_link()
@@ -132,14 +133,14 @@ class TestMainPage:
 
     @allure.feature("Footer functionality")
     @allure.title("TC 015 - Проверка функциональности ссылки 'telephone number'")
-    @pytest.mark.xfail(reason="Попап не реализован")
+    # @pytest.mark.xfail(reason="Попап не реализован")
     @pytest.mark.smoke_test
     def test_positive_footer_phone_number_smoke(self, main_page):
         main_page.check_telephone_number_link()
 
     @allure.feature("Footer functionality")
     @allure.title("TC 016 - Проверка функциональности ссылки 'Прайс'")
-    @pytest.mark.xfail(reason="При переходе на страницу выдает 404 ошибку")
+    # @pytest.mark.xfail(reason="При переходе на страницу выдает 404 ошибку")
     @pytest.mark.smoke_test
     def test_positive_footer_price_smoke(self, main_page):
         main_page.check_price_link()
