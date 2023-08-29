@@ -1,4 +1,6 @@
 # Страница товара
+import time
+
 import allure
 from selenium.common import TimeoutException
 from selenium.webdriver.common.by import By
@@ -16,6 +18,7 @@ class ItemPage(SeleniumBase):
         self._basket = (By.XPATH, "//a[@class='header-cart-link active']")
         self._pd_articul = (By.XPATH, "(//div[@class='pd-articul'])[2]")
         self._available_status = (By.XPATH, "(//div[@class='pd-ost_text'])[1]")
+        self._item_amount = (By.XPATH, "//input[@class='amount']")
 
     def add_item_to_basket_and_go_to_basket(self):
         if self.is_element_present(self._add_item):
@@ -31,3 +34,17 @@ class ItemPage(SeleniumBase):
         else:
             print("Не удалось добавить товар в корзину")
             return None
+
+    @allure.step('Добавляем товар в корзину в количестве {amount}')
+    def add_item_to_cart(self, amount: int):
+        self.find_element(self._add_item).click()
+        amount_field = self.find_element(self._item_amount)
+        amount_field.clear()
+        amount_field.send_keys(amount)
+        time.sleep(2)
+        return self
+
+    @allure.step('Нажатие на кнопку корзины')
+    def click_on_cart(self):
+        self.find_element(self._basket).click()
+        return self
