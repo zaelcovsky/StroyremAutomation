@@ -59,16 +59,18 @@ RUN curl -o allure-commandline-2.23.0.tgz -Ls https://repo.maven.apache.org/mave
     && tar -zxvf allure-commandline-2.23.0.tgz -C /opt/ \
     && ln -s /opt/allure-2.23.0/bin/allure /usr/bin/allure \
     && rm -rf allure-commandline-2.23.0.tgz
+
 # Copy and install requirements.txt
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+
 # Copy all project files in docker image
 COPY . .
 # Set volume for allure report files
 # VOLUME /allure_result
 # Expose our port to the world
 EXPOSE 9999
+
 # Run tests and make Allure report
-CMD ["sh", "-c", "pytest -s -v --alluredir=allure_result tests/ && allure serve --port 9999 allure_result"]
-# Stub for debugging
-#CMD ["tail", "-f", "/dev/null"]
+CMD ["sh", "-c", "if [ -d allure-result ]; then rm -rf allure-result/*; fi ; pytest -s -v -n auto --alluredir=allure-result ; if [ -d allure-report ]; then cp -r allure-report/history allure-result/history; fi ; allure generate allure-result --clean -o allure-report ; allure open --port 9999 allure-report"]
+
