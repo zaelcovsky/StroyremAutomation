@@ -1,9 +1,6 @@
 name: Stroyrem_push
 
-on:
-  push:
-    branches:
-      - master
+on: push
 
 # jobs:
 #   build:
