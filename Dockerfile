@@ -72,5 +72,5 @@ COPY . .
 EXPOSE 9999
 
 # Run tests and make Allure report
-CMD ["sh", "-c", "if [ -d allure-result ]; then rm -rf allure-result/*; fi ; pytest -s -v -n auto --alluredir=allure-result ; if [ -d allure-report ]; then cp -r allure-report/history allure-result/history; fi ; allure generate allure-result --clean -o allure-report ; allure open --port 9999 allure-report"]
+CMD ["sh", "-c", "pytest -s -v -n auto --alluredir=allure_result ; allure serve --port 9999 allure_result || true"]
 
