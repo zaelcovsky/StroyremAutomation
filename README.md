@@ -1,14 +1,7 @@
 # StroyremAutomation
 
-Правила работы с GIT
-#Несколько маркеров
-#Потоки 
-#запуск тестов на проде и на stage
-
-
 ### Запуск тестов в Docker
-- ```docker build -t stroyremautomation:0.0.1 .```
-- ```docker run -p 9999:9999 stroyremautomation:0.0.1```  
+- ```docker-compose up --build```
 
 После формирования отчета Allure он доступен на http://localhost:9999/  
 Также отчет Allure можно скопировать из контейнера и сформировать на хосте: 

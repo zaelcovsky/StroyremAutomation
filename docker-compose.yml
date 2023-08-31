@@ -1,4 +1,3 @@
-
 services:
   allure_report:
     build:
