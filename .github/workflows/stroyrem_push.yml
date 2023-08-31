@@ -1,8 +1,9 @@
 name: Stroyrem_push
 
 on:
-  workflow_dispatch:
-    branches: [ "main" ]
+  push:
+    branches:
+      - master
 
 # jobs:
 #   build:
@@ -29,13 +30,9 @@ jobs:
       - name: Pass credentials
         run: |
           sudo echo "${{ secrets.STROYREM_CREDENTIALS }}" > data/credentials.py
-      - name: docker build
+      - name: docker-compose
         run: |
-          sudo docker build -t stroyrem .
-      - name: docker run
-        run: |
-          sudo docker run -v $PWD/allure_result:/app/allure_result stroyrem \
-            pytest -s -v --alluredir=allure_result tests/
+          docker-compose up -d --force-recreate --build
 
       - name: Get Allure history
         uses: actions/checkout@v2
