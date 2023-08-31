@@ -2,22 +2,6 @@ name: Stroyrem_push
 
 on: push
 
-# jobs:
-#   build:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - uses: actions/checkout@v3
-#       - name: Pass credentials
-#         run: |
-#           sudo echo "${{ secrets.STROYREM_CREDENTIALS }}" > data/credentials.py
-#       - name: docker build
-#         run: |
-#           sudo docker build -t stroyrem .
-#       - name: docker run
-#         run: |
-#           sudo docker run --rm stroyrem pytest -s -v tests/
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,7 +13,7 @@ jobs:
           sudo echo "${{ secrets.STROYREM_CREDENTIALS }}" > data/credentials.py
       - name: docker-compose
         run: |
-          docker-compose up -d --force-recreate --build
+          docker-compose up --force-recreate --build
 
       - name: Get Allure history
         uses: actions/checkout@v2
